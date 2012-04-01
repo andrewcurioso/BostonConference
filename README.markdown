@@ -26,6 +26,7 @@ Installing the Boston Conference Management system is quick and easy.
 4. Install the schema with `cake schema create -P BostonConference`
 
 In app/Config/bootstrap.php
+
 ```php
 CakePlugin::load('BostonConference', array('routes' => true));
 ```
@@ -36,6 +37,7 @@ You can then test it by going to your domain.
 By default the plugin maps itself to your CakePHP root directory. To change this behavior you can configure a prefix. For example, if you want all your paths to be inside of the /events/ directory:
 
 In your app/Config/core.php
+
 ```php
 Config.write('BostonConference.routePrefix','events');
 ```
