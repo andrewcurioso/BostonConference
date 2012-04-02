@@ -20,9 +20,9 @@ class SponsorshipLevel extends BostonConferenceAppModel {
  */
 	public $validate = array(
 		'label' => array(
-			'maxlength' => array(
-				'rule' => array('maxlength',32),
-				'message' => 'Label cannot excede 32 characters',
+			'between' => array(
+				'rule' => array('between',3,32),
+				'message' => 'Label must be between 3 and 32 characters long',
 				'allowEmpty' => false,
 				'required' => false
 			),
@@ -34,11 +34,23 @@ class SponsorshipLevel extends BostonConferenceAppModel {
 				'allowEmpty' => false,
 				'required' => true,
 			),
+			'comparison' => array(
+				'rule' => array('comparison','>',0),
+				'message' => 'Event ID must be greater than 0',
+				'allowEmpty' => false,
+				'required' => true,
+			),
 		),
 		'position' => array(
-			'between' => array(
-				'rule' => array('between',0,127),
-				'message' => 'Position must be between 0 and 127',
+			'comparison' => array(
+				'rule' => array('comparison','>=',0),
+				'message' => 'Position must be a positive integer',
+				'allowEmpty' => false,
+				'required' => true,
+			),
+			'comparison-2' => array(
+				'rule' => array('comparison','<=',127),
+				'message' => 'Position must be less than 128',
 				'allowEmpty' => false,
 				'required' => true,
 			),
@@ -51,8 +63,8 @@ class SponsorshipLevel extends BostonConferenceAppModel {
 				'required' => false,
 			),
 			'comparison' => array(
-				'rule' => array('comparison','>',0),
-				'message' => 'Sponsor count must be greater than 0',
+				'rule' => array('comparison','>=',0),
+				'message' => 'Sponsor count must be a positive integer',
 				'allowEmpty' => true,
 				'required' => false,
 			),

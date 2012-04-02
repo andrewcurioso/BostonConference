@@ -19,9 +19,9 @@ class Sponsor extends BostonConferenceAppModel {
  */
 	public $validate = array(
 		'organization' => array(
-			'maxlength' => array(
-				'rule' => array('maxlength',128),
-				'message' => 'Organization name cannot excede 128 characters',
+			'between' => array(
+				'rule' => array('between',128),
+				'message' => 'Organization name must be between 2 and 128 characters',
 				'allowEmpty' => false,
 				'required' => true
 			),
