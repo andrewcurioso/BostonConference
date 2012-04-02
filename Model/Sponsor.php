@@ -48,12 +48,82 @@ class Sponsor extends BostonConferenceAppModel {
 				'required' => false
 			),
 		),
+		'contact_name' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Contact name is required',
+				'allowEmpty' => false,
+				'required' => true
+			),
+			'maxlength' => array(
+				'rule' => array('maxlength',64),
+				'message' => 'Contact name cannot excede 64 characters',
+				'allowEmpty' => false,
+				'required' => true
+			),
+		),
+		'contact_email' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Contact email is required',
+				'allowEmpty' => false,
+				'required' => true
+			),
+			'maxlength' => array(
+				'rule' => array('maxlength',64),
+				'message' => 'Contact email cannot excede 64 characters',
+				'allowEmpty' => false,
+				'required' => true
+			),
+			'email' => array(
+				'rule' => array('email'),
+				'message' => 'Contact email address must be a valid email address',
+				'allowEmpty' => false,
+				'required' => true
+			),
+		),
+		'contact_phone' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Contact phone is required',
+				'allowEmpty' => false,
+				'required' => true
+			),
+			'maxlength' => array(
+				'rule' => array('maxlength',16),
+				'message' => 'Contact pone cannot excede 16 characters',
+				'allowEmpty' => false,
+				'required' => true
+			),
+		),
+		'budget' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'Budget must be numeric',
+				'allowEmpty' => false,
+				'required' => true
+			),
+		),
+		'approved' => array(
+			'boolean' => array(
+				'rule' => array('boolean'),
+				'message' => 'Enabled must be either yes (1) or no (0)',
+				'allowEmpty' => false,
+				'required' => true
+			),
+		),
 		'sponsorship_level_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'Sponsorship level must be numeric',
-				'allowEmpty' => false,
+				'allowEmpty' =>true,
 				'required' => true
+			),
+			'comparison' => array(
+				'rule' => array('comparison','>=',0),
+				'message' => 'Sponsorship Level ID must be a positive integer',
+				'allowEmpty' => false,
+				'required' => true,
 			),
 		),
 	);

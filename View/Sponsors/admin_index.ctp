@@ -4,7 +4,8 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('organization');?></th>
-			<th><?php echo $this->Paginator->sort('sponsorship_level_id');?></th>
+			<th><?php echo $this->Paginator->sort('approved','A',array('title' => 'Approved'));?></th>
+			<th><?php echo $this->Paginator->sort('sponsorship_level_id','Level');?></th>
 			<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
@@ -12,6 +13,7 @@
 	<tr>
 		<td><?php echo h($sponsor['Sponsor']['id']); ?>&nbsp;</td>
 		<td><?php echo h($sponsor['Sponsor']['organization']); ?>&nbsp;</td>
+		<td><?php echo h($sponsor['Sponsor']['approved'] ? 'Y' : 'N'); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($sponsor['SponsorshipLevel']['label'], array('controller' => 'sponsorship_levels', 'action' => 'view', $sponsor['SponsorshipLevel']['id'])); ?>
 		</td>

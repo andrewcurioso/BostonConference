@@ -8,13 +8,40 @@ App::uses('BostonConferenceAppController', 'BostonConference.Controller');
 class SponsorsController extends BostonConferenceAppController {
 
 /**
- * index method
+ * index method.
+ * Displays all approved sponsors.
  *
  * @return void
  */
 	public function index() {
 		$this->Sponsor->SponsorshipLevel->contain(array('Sponsor'));
 		$this->set('sponsorshipLevels', $this->Sponsor->SponsorshipLevel->find('all',array('order'=>'position')));
+	}
+
+/**
+ * request method.
+ * Form used to request more information about sponsorships.
+ *
+ * @return void
+ */
+	public function request() {
+		if ($this->request->is('post')) {
+
+			if ( array_key_exists($this->Sponsor->alias,$this->request->data) )
+				$this->request->data[$this->Sponsor->alias]['approved'] = 0;
+			else
+				$this->request->data['approved'] = 0;
+
+			$this->Sponsor->create();
+			if ($this->Sponsor->save($this->request->data)) {
+				$this->Session->setFlash(__('Your request has been submitted. We will get back to you shortly.'));
+				$this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('Your request could not be submitted. Please, try again.'));
+			}
+		}
+
+		$this->_setBudgetOptions();
 	}
 
 /**
@@ -56,6 +83,8 @@ class SponsorsController extends BostonConferenceAppController {
 				$this->Session->setFlash(__('The sponsor could not be saved. Please, try again.'));
 			}
 		}
+
+		$this->_setBudgetOptions();
 		$sponsorshipLevels = $this->Sponsor->SponsorshipLevel->find('list');
 		$this->set(compact('sponsorshipLevels'));
 	}
@@ -81,6 +110,8 @@ class SponsorsController extends BostonConferenceAppController {
 		} else {
 			$this->request->data = $this->Sponsor->read(null, $id);
 		}
+
+		$this->_setBudgetOptions();
 		$sponsorshipLevels = $this->Sponsor->SponsorshipLevel->find('list');
 		$this->set(compact('sponsorshipLevels'));
 	}
@@ -105,5 +136,21 @@ class SponsorsController extends BostonConferenceAppController {
 		}
 		$this->Session->setFlash(__('Sponsor was not deleted'));
 		$this->redirect(array('action' => 'index'));
+	}
+
+/**
+ * Sets the budget options for the view
+ *
+ * @returns void
+ */
+	protected function _setBudgetOptions() {
+		$this->set('budgetOptions',array(
+			'-1000'  => 'Less than $1,000',
+			'2500'  => 'Up to $2,500',
+			'5000'  => 'Up to $5,000',
+			'10000' => 'Up to $10,000',
+			'99999' => 'Greater than $10,000',
+			'0'     => 'Prefer not to say'
+		));
 	}
 }

@@ -34,3 +34,9 @@ Router::connect(
 	array( 'controller' => $controllers )
 );
 
+Router::connect(
+	$prefix.'/:controller/:action/*',
+	array( 'plugin' => 'BostonConference' ),
+	array( 'controller' => $controllers )
+);
+

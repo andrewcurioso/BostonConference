@@ -11,7 +11,11 @@ class SponsorshipLevelTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('plugin.boston_conference.sponsorship_level', 'app.event', 'app.sponsor');
+	public $fixtures = array(
+				'plugin.boston_conference.sponsorship_level',
+				'plugin.boston_conference.event',
+				'plugin.boston_conference.sponsor',
+				);
 
 /**
  * setUp method

@@ -16,14 +16,39 @@
 			<?php echo h($sponsor['Sponsor']['website']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Contact Name'); ?></dt>
+		<dd>
+			<?php echo h($sponsor['Sponsor']['contact_name']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Contact Email'); ?></dt>
+		<dd>
+			<?php echo h($sponsor['Sponsor']['contact_email']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Contact Phone'); ?></dt>
+		<dd>
+			<?php echo h($sponsor['Sponsor']['contact_phone']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Logo Url'); ?></dt>
 		<dd>
 			<?php echo h($sponsor['Sponsor']['logo_url']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Approved'); ?></dt>
+		<dd>
+			<?php echo h($sponsor['Sponsor']['approved'] ? 'Yes' : 'No'); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Sponsorship Level'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($sponsor['SponsorshipLevel']['label'], array('controller' => 'sponsorship_levels', 'action' => 'view', $sponsor['SponsorshipLevel']['id'])); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Notes'); ?></dt>
+		<dd>
+			<?php echo h($sponsor['Sponsor']['notes']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
