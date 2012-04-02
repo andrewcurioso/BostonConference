@@ -26,5 +26,11 @@ Router::connect(
 	array( 'plugin' => 'BostonConference', 'admin' => true )
 );
 
+$controllers = 'sponsors';
 
+Router::connect(
+	$prefix.'/:controller',
+	array( 'plugin' => 'BostonConference', 'action' => 'index' ),
+	array( 'controller' => $controllers )
+);
 

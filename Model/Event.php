@@ -33,7 +33,7 @@ class Event extends BostonConferenceAppModel {
  */
 	public $hasMany = array(
 		'SponsorshipLevel' => array(
-			'className' => 'SponsorshipLevel',
+			'className' => 'BostonConference.SponsorshipLevel',
 			'foreignKey' => 'sponsorship_level_id',
 			'dependent' => true,
 		)

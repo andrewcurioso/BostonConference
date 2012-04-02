@@ -80,7 +80,7 @@ class SponsorshipLevel extends BostonConferenceAppModel {
  */
 	public $belongsTo = array(
 		'Event' => array(
-			'className' => 'Event',
+			'className' => 'BostonConference.Event',
 			'foreignKey' => 'event_id',
 		)
 	);
@@ -92,7 +92,7 @@ class SponsorshipLevel extends BostonConferenceAppModel {
  */
 	public $hasMany = array(
 		'Sponsor' => array(
-			'className' => 'Sponsor',
+			'className' => 'BostonConference.Sponsor',
 			'foreignKey' => 'sponsorship_level_id',
 			'dependent' => true,
 		)

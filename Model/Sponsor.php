@@ -20,7 +20,7 @@ class Sponsor extends BostonConferenceAppModel {
 	public $validate = array(
 		'organization' => array(
 			'between' => array(
-				'rule' => array('between',128),
+				'rule' => array('between',2,128),
 				'message' => 'Organization name must be between 2 and 128 characters',
 				'allowEmpty' => false,
 				'required' => true
@@ -67,7 +67,7 @@ class Sponsor extends BostonConferenceAppModel {
  */
 	public $belongsTo = array(
 		'SponsorshipLevel' => array(
-			'className' => 'SponsorshipLevel',
+			'className' => 'BostonConference.SponsorshipLevel',
 			'foreignKey' => 'sponsorship_level_id',
 		)
 	);

@@ -16,6 +16,8 @@ class SponsorFixture extends CakeTestFixture {
 		'website' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 128, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'logo_url' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 128, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'sponsorship_level_id' => array('type' => 'integer', 'null' => true, 'default' => '0', 'length' => 10),
+		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+		'modified' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
 		'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1)),
 		'tableParameters' => array('charset' => 'latin1', 'collate' => 'latin1_swedish_ci', 'engine' => 'InnoDB')
 	);
@@ -31,7 +33,9 @@ class SponsorFixture extends CakeTestFixture {
 			'organization' => 'Lorem ipsum dolor sit amet',
 			'website' => 'Lorem ipsum dolor sit amet',
 			'logo_url' => 'Lorem ipsum dolor sit amet',
-			'sponsorship_level_id' => 1
+			'sponsorship_level_id' => 1,
+			'created' => '2012-04-02 08:51:44',
+			'modified' => '2012-04-02 08:51:44'
 		),
 	);
 }

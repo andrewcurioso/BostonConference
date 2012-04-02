@@ -675,13 +675,17 @@ div.water-light.left {
 
 a.sponsor-box {
 	float: left;
+	display: block;
+	margin: 0 10px 0 0;
+	font-weight: normal;
+}
+
+a.sponsor-box.diamond, a.sponsor-box.gold, a.sponsor-box.silver {
 	background-color: #ddd7ca;
 	border: 1px solid black;
 	margin: 10px 10px 10px 0;
-	display: block;
 	text-align: center;
 	text-decoration: none;
-	font-weight: normal;
 }
 
 a.sponsor-box.diamond {
@@ -705,7 +709,7 @@ a.sponsor-box.silver {
 	font-size: 10px;
 }
 
-a.sponsor-box:hover {
+a.sponsor-box.diamond:hover,  a.sponsor-box.gold:hover, a.sponsor-box.silver:hover {
 	background-color: #faf9f7;
 }
 
