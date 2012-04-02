@@ -18,15 +18,9 @@ class Event extends BostonConferenceAppModel {
  */
 	public $validate = array(
 		'name' => array(
-			'maxlength' => array(
-				'rule' => array('maxlength',256),
-				'message' => 'Event name cannot excede 256 characters',
-				'allowEmpty' => false,
-				'required' => true
-			),
-			'minlength' => array(
-				'rule' => array('minlength',3),
-				'message' => 'Event name must be at least three characters',
+			'between' => array(
+				'rule' => array('between',3,256),
+				'message' => 'Event name must be between 3 and 256 characters',
 				'allowEmpty' => false,
 				'required' => true
 			),
