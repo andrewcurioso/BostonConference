@@ -22,4 +22,12 @@ class BostonConferenceController extends BostonConferenceAppController {
 	public function index() {
 	}
 
+/**
+ * Index method. Displays the administrator homepage.
+ *
+ * @returns void
+ */
+	public function admin_index() {
+	}
+
 }

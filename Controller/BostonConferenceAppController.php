@@ -27,7 +27,12 @@ class BostonConferenceAppController extends AppController {
  * @returns void
  */
 	protected function _createDefaultNavigationLinks() {
+		$isAdmin = $this->params['admin'];
+
 		$this->addNavigationLink('Home',array('plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'index'));
+
+		if ( $isAdmin ) 
+			$this->addNavigationLink('Events',array('plugin' => 'BostonConference', 'controller' => 'events', 'action' => 'index'));
 	}
 
 /**
