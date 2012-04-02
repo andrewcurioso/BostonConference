@@ -32,4 +32,16 @@ class Event extends BostonConferenceAppModel {
 			),
 		)
 	);
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'SponsorshipLevel' => array(
+			'className' => 'SponsorshipLevel',
+			'foreignKey' => 'sponsorship_level_id',
+			'dependent' => true,
+		)
+	);
 }
