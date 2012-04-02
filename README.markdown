@@ -33,13 +33,24 @@ CakePlugin::load('BostonConference', array('routes' => true));
 
 You can then test it by going to your domain.
 
-## Routing
+## Configuring
+The Boston Conference Management System is extremely configurable. You should never have to edit the Controllers or Models at all.
+
+### Routing
 By default the plugin maps itself to your CakePHP root directory. To change this behavior you can configure a prefix. For example, if you want all your paths to be inside of the /events/ directory:
 
-In your app/Config/core.php
+In your app/Config/core.php file:
 
 ```php
 Config.write('BostonConference.routePrefix','events');
+```
+
+### Site and Organization Name
+You'll probably want to have a site and organization name specified. The organization name is the name of the company or organization coordinating the event and the site name is what appears in the title bar and various other places. For example, in your app/Config/core.php file:
+
+```php
+Config.write('BostonConference.organizationName','Acme Inc.');
+Config.write('BostonConference.siteName','A Wicked Awesome Conference');
 ```
 
 ## Contributing
