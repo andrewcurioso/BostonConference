@@ -141,4 +141,26 @@ class Sponsor extends BostonConferenceAppModel {
 			'foreignKey' => 'sponsorship_level_id',
 		)
 	);
+
+/**
+ * Gets the sponsors for the current event.
+ *
+ * @param boolean $approved True to get only sponsors that have been approved or otherwise false.
+ * @returns array The sponsors for the current event.
+ */
+	public function forCurrentEvent($approved = true) {
+		if ( !($event = $this->SponsorshipLevel->Event->current()) )
+			return array();
+
+
+		if ( $approved )
+			$this->SponsorshipLevel->contain(array('Sponsor' => array( 'conditions' => array( 'Sponsor.approved' => true ))));
+		else
+			$this->SponsorshipLevel->contain(array('Sponsor'));
+		
+
+		return $this->SponsorshipLevel->find('all', array(
+			'conditions' => array( 'SponsorshipLevel.event_id' => $event['Event']['id'] )
+		));
+	}
 }

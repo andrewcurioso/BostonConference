@@ -14,8 +14,7 @@ class SponsorsController extends BostonConferenceAppController {
  * @return void
  */
 	public function index() {
-		$this->Sponsor->SponsorshipLevel->contain(array('Sponsor'));
-		$this->set('sponsorshipLevels', $this->Sponsor->SponsorshipLevel->find('all',array('order'=>'position')));
+		$this->set('sponsorshipLevels', $this->Sponsor->forCurrentEvent());
 	}
 
 /**
