@@ -34,8 +34,32 @@ class Event extends BostonConferenceAppModel {
 	public $hasMany = array(
 		'SponsorshipLevel' => array(
 			'className' => 'BostonConference.SponsorshipLevel',
-			'foreignKey' => 'sponsorship_level_id',
+			'foreignKey' => 'event_id',
 			'dependent' => true,
 		)
 	);
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'Venue' => array(
+			'className' => 'BostonConference.Venue',
+			'foreignKey' => 'venue_id'
+		)
+	);
+/**
+ * Gets the currently event.
+ * This will typically be the next event but could be the previous event if
+ * there isn't any next event.
+ *
+ * @returns array The current event.
+ */
+	public function current() {
+		$this->contain();
+		return $this->find('first', array(
+			'order' => array( 'Event.start_date < NOW()', 'Event.start_date' )
+		));
+	}
 }

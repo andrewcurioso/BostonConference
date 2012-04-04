@@ -1,15 +1,20 @@
 <?php
 
+// Set up the prefix
 
 ($adminPrefix = Configure::read('BostonConference.adminPrefix')) || ($adminPrefix = 'admin');
 
 if ( $prefix = Configure::read('BostonConference.routePrefix') )
 	$prefix = '/'.$prefix;
 
+// Event index
+
 Router::connect(
 	$prefix.'/',
 	array( 'plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'index' )
 );
+
+// Admin routing
 
 Router::connect(
 	'/'.$adminPrefix.('/'.$prefix ? $prefix : ''),
@@ -26,6 +31,8 @@ Router::connect(
 	array( 'plugin' => 'BostonConference', 'admin' => true )
 );
 
+// Index for plural controllers (more than one per event)
+
 $controllers = 'sponsors';
 
 Router::connect(
@@ -40,3 +47,9 @@ Router::connect(
 	array( 'controller' => $controllers )
 );
 
+// Singular controllers (one per event)
+
+Router::connect(
+	$prefix.'/venue',
+	array( 'plugin' => 'BostonConference', 'controller' => 'Venues', 'action' => 'index' )
+);

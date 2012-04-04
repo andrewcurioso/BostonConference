@@ -47,6 +47,8 @@ class EventsController extends BostonConferenceAppController {
 				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
 			}
 		}
+		$venues = $this->Event->Venue->find('list');
+		$this->set(compact('venues'));
 	}
 
 /**
@@ -70,6 +72,8 @@ class EventsController extends BostonConferenceAppController {
 		} else {
 			$this->request->data = $this->Event->read(null, $id);
 		}
+		$venues = $this->Event->Venue->find('list');
+		$this->set(compact('venues'));
 	}
 
 /**
