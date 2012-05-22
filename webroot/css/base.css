@@ -123,6 +123,7 @@ h2 {
 #navigation li {
 	float: left;
 	list-style-type: none;
+	color: #999;
 }
 
 #navigation li.account {
@@ -137,6 +138,10 @@ h2 {
 
 #navigation li a:hover {
 	text-decoration: underline;
+}
+
+#navigation li.auth {
+  float: right;
 }
 
 #navigation div.sidebar-block {

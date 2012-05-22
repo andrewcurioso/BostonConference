@@ -8,6 +8,17 @@ App::uses('BostonConferenceAppController', 'BostonConference.Controller');
 class SponsorsController extends BostonConferenceAppController {
 
 /**
+ * before_filter method
+ *
+ */
+	public function beforeFilter() {
+		if ( property_exists($this,'Auth') )
+			$this->Auth->allow('request');
+
+		parent::beforeFilter();
+	}
+
+/**
  * index method.
  * Displays all approved sponsors.
  *

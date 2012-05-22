@@ -39,6 +39,22 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					<?php
 					foreach( $navigation_links as $link )
 						echo '<li>'.$this->Html->link($link[0],$link[1]).'</li>';
+
+					echo '<li class="auth">';
+					if ( !empty($authentication['greeting']) ) {
+						echo $this->Html->clean($authentication['greeting']).'&nbsp-&nbsp;';
+					}
+
+					if ( !empty($authentication['login_url']) ) {
+						echo $this->Html->link('Login',$authentication['login_url']);
+					}
+
+					if ( !empty($authentication['logout_url']) ) {
+						echo $this->Html->link('Logout',$authentication['logout_url']);
+					}
+						
+
+					echo '</li>';
 					?>
 					</ul>
 					<div class="sidebar-block"> </div>

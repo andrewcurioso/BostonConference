@@ -14,6 +14,12 @@ Router::connect(
 	array( 'plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'index' )
 );
 
+// Logout
+Router::connect(
+	$prefix.'/logout',
+	array( 'plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'logout' )
+);
+
 // Admin routing
 
 Router::connect(

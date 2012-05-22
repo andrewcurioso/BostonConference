@@ -17,8 +17,10 @@ class BostonConferenceAppController extends AppController {
  * @return void
  */
 	public function beforeFilter() {
-		$this->_createDefaultNavigationLinks();
 		parent::beforeFilter();
+
+		$this->_createDefaultNavigationLinks();
+		$this->_populateAuthData();
 	}
 
 /**
@@ -41,6 +43,29 @@ class BostonConferenceAppController extends AppController {
 
 		if ( $isAdmin )
 			$this->addNavigationLink('Hotels',array('plugin' => 'BostonConference', 'controller' => 'hotels', 'action' => 'index'));
+	}
+
+/**
+ * Populates authentication related values for the view.
+ *
+ * @returns void
+ */
+	protected function _populateAuthData() {
+
+		if ( !property_exists($this,'Auth') )
+			return;
+
+		$a = array();
+
+		if ( $this->Auth->loggedIn() ) {
+			$a['logout_url'] = array( 'plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'logout' );
+			$a['greeting'] = Configure::read('BostonConference.greeting');
+		} else {
+			$a['login_url'] = $this->Auth->loginAction;
+		}
+
+
+		$this->set('authentication',$a);
 	}
 
 /**

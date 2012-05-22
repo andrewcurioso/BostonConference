@@ -30,4 +30,17 @@ class BostonConferenceController extends BostonConferenceAppController {
 	public function admin_index() {
 	}
 
+/**
+ * Logout method. Logs out the current user and returns them to the
+ * appropriate location.
+ *
+ * @returns void
+ */
+	public function logout() {
+		if ( property_exists($this,'Auth') )
+			$this->redirect($this->Auth->logout());
+		else
+			$this->redirect(array('index'));
+	}
+
 }
