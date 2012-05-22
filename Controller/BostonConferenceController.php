@@ -15,6 +15,16 @@ class BostonConferenceController extends BostonConferenceAppController {
 	public $name = 'BostonConference';
 
 /**
+ * beforeFilter method.
+ *
+ * @returns void
+ */
+	public function beforeFilter() {
+		$this->Auth->allow('logout');
+		parent::beforeFilter();
+	}
+
+/**
  * Index method. Displays the conference homepage.
  *
  * @returns void
