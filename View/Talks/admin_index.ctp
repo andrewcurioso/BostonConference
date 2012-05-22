@@ -6,7 +6,7 @@
 			<th><?php echo $this->Paginator->sort('speaker_id');?></th>
 			<th><?php echo $this->Paginator->sort('topic');?></th>
 			<th><?php echo $this->Paginator->sort('start_time');?></th>
-			<th><?php echo $this->Paginator->sort('end_time');?></th>
+			<th><?php echo $this->Paginator->sort('duration');?></th>
 			<th><?php echo $this->Paginator->sort('track_id');?></th>
 			<th><?php echo $this->Paginator->sort('modified');?></th>
 			<th class="actions"><?php echo __('Actions');?></th>
@@ -20,7 +20,7 @@
 		</td>
 		<td><?php echo h($talk['Talk']['topic']); ?>&nbsp;</td>
 		<td><?php echo h($talk['Talk']['start_time']); ?>&nbsp;</td>
-		<td><?php echo h($talk['Talk']['end_time']); ?>&nbsp;</td>
+		<td><?php echo h($talk['Talk']['duration']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($talk['Track']['name'], array('controller' => 'tracks', 'action' => 'view', $talk['Track']['id'])); ?>
 		</td>

@@ -31,9 +31,9 @@
 			<?php echo h($talk['Talk']['start_time']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('End Time'); ?></dt>
+		<dt><?php echo __('Duration'); ?></dt>
 		<dd>
-			<?php echo h($talk['Talk']['end_time']); ?>
+			<?php echo h($talk['Talk']['duration']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Approved'); ?></dt>

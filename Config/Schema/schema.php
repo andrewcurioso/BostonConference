@@ -86,7 +86,7 @@ class BostonConferenceSchema extends CakeSchema {
 		'topic' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 128, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'abstract' => array('type' => 'text', 'null' => true, 'default' => NULL, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
 		'start_time' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
-		'end_time' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
+		'duration' => array('type' => 'integer', 'null' => true, 'default' => '60', 'length' => 10),
 		'approved' => array('type' => 'boolean', 'null' => true, 'default' => '0'),
 		'track_id' => array('type' => 'integer', 'null' => true, 'default' => NULL, 'length' => 10),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
