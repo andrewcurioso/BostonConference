@@ -17,7 +17,7 @@ They are license under the Create Commons Attribution License "CC AT"
 
 See: http://creativecommons.org/licenses/by/3.0/
 
-![Creative Commons License"](http://i.creativecommons.org/l/by/3.0/88x31.png")
+![Creative Commons License](http://i.creativecommons.org/l/by/3.0/88x31.png)
 
 ## DISCLAIMER
 
