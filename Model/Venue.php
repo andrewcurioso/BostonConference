@@ -66,8 +66,12 @@ class Venue extends BostonConferenceAppModel {
 		if ( !($event = $this->Event->current()) && !$event['Event']['venue_id'] )
 			return null;
 
-		$this->contain();
-		return $this->find('first', array( 'conditions' => array('Venue.id' => $event['Event']['venue_id']) ));
+		$this->contain( array( 'Event' => array( 'EventHotel' => array( 'Hotel' ) ) ) );
+
+		$ret = $this->find('first', array( 'conditions' => array('Venue.id' => $event['Event']['venue_id']) ));
+		$ret['Event'] = $ret['Event'][0];
+
+		return $ret;
 	}
 
 }

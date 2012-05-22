@@ -36,6 +36,11 @@ class Event extends BostonConferenceAppModel {
 			'className' => 'BostonConference.SponsorshipLevel',
 			'foreignKey' => 'event_id',
 			'dependent' => true,
+		),
+		'EventHotel' => array(
+			'className' => 'BostonConference.EventHotel',
+			'foreignKey' => 'event_id',
+			'dependent' => true,
 		)
 	);
 /**

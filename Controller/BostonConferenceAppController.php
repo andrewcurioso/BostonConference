@@ -31,13 +31,16 @@ class BostonConferenceAppController extends AppController {
 
 		$this->addNavigationLink('Home',array('plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'index'));
 
-		if ( $isAdmin ) 
+		if ( $isAdmin )
 			$this->addNavigationLink('Events',array('plugin' => 'BostonConference', 'controller' => 'events', 'action' => 'index'));
 
 
 		$this->addNavigationLink('Sponsors',array('plugin' => 'BostonConference', 'controller' => 'sponsors', 'action' => 'index'));
 
 		$this->addNavigationLink('Venue'.($isAdmin ? 's' : ''),array('plugin' => 'BostonConference', 'controller' => 'Venues', 'action' => 'index'));
+
+		if ( $isAdmin )
+			$this->addNavigationLink('Hotels',array('plugin' => 'BostonConference', 'controller' => 'hotels', 'action' => 'index'));
 	}
 
 /**
