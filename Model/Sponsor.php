@@ -139,6 +139,7 @@ class Sponsor extends BostonConferenceAppModel {
 		'SponsorshipLevel' => array(
 			'className' => 'BostonConference.SponsorshipLevel',
 			'foreignKey' => 'sponsorship_level_id',
+			'counterCache' => true,
 		)
 	);
 

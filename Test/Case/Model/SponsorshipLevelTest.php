@@ -37,7 +37,7 @@ class SponsorshipLevelTestCase extends CakeTestCase {
 			'label' => 'Test Sponsorship Level',
 			'event_id' => 1,
 			'position' => 0,
-			'sponsors_count' => 0
+			'sponsor_count' => 0
 		);
 
 		$result = $this->SponsorshipLevel->save(array_merge($data,array('label' => 'ab')));
@@ -64,13 +64,13 @@ class SponsorshipLevelTestCase extends CakeTestCase {
 		$this->assertFalse($result);
 		$this->assertEquals(array('position'),array_keys($this->SponsorshipLevel->validationErrors));
 
-		$result = $this->SponsorshipLevel->save(array_merge($data,array('sponsors_count' => 'abc')));
+		$result = $this->SponsorshipLevel->save(array_merge($data,array('sponsor_count' => 'abc')));
 		$this->assertFalse($result);
-		$this->assertEquals(array('sponsors_count'),array_keys($this->SponsorshipLevel->validationErrors));
+		$this->assertEquals(array('sponsor_count'),array_keys($this->SponsorshipLevel->validationErrors));
 
-		$result = $this->SponsorshipLevel->save(array_merge($data,array('sponsors_count' => -1)));
+		$result = $this->SponsorshipLevel->save(array_merge($data,array('sponsor_count' => -1)));
 		$this->assertFalse($result);
-		$this->assertEquals(array('sponsors_count'),array_keys($this->SponsorshipLevel->validationErrors));
+		$this->assertEquals(array('sponsor_count'),array_keys($this->SponsorshipLevel->validationErrors));
 
 		$result = $this->SponsorshipLevel->save($data);
 		$this->assertInternalType('array',$result);

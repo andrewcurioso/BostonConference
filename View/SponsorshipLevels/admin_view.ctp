@@ -23,7 +23,7 @@
 		</dd>
 		<dt><?php echo __('Sponsors Count'); ?></dt>
 		<dd>
-			<?php echo h($sponsorshipLevel['SponsorshipLevel']['sponsors_count']); ?>
+			<?php echo h($sponsorshipLevel['SponsorshipLevel']['sponsor_count']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>

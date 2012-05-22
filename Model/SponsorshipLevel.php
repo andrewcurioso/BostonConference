@@ -55,7 +55,7 @@ class SponsorshipLevel extends BostonConferenceAppModel {
 				'required' => true,
 			),
 		),
-		'sponsors_count' => array(
+		'sponsor_count' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				'message' => 'Sponsor count must be numeric',

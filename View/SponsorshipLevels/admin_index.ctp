@@ -5,7 +5,7 @@
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('label');?></th>
 			<th><?php echo $this->Paginator->sort('position','Pos');?></th>
-			<th><?php echo $this->Paginator->sort('sponsors_count','Count');?></th>
+			<th><?php echo $this->Paginator->sort('sponsor_count','Count');?></th>
 			<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
 	<?php
@@ -14,7 +14,7 @@
 		<td><?php echo h($sponsorshipLevel['SponsorshipLevel']['id']); ?>&nbsp;</td>
 		<td><?php echo h($sponsorshipLevel['SponsorshipLevel']['label']); ?>&nbsp;</td>
 		<td><?php echo h($sponsorshipLevel['SponsorshipLevel']['position']); ?>&nbsp;</td>
-		<td><?php echo h($sponsorshipLevel['SponsorshipLevel']['sponsors_count']); ?>&nbsp;</td>
+		<td><?php echo h($sponsorshipLevel['SponsorshipLevel']['sponsor_count']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $sponsorshipLevel['SponsorshipLevel']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $sponsorshipLevel['SponsorshipLevel']['id'])); ?>
