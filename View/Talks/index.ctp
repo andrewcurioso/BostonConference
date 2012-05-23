@@ -88,7 +88,13 @@ function getTalksInBlock( $block, $talks, $startIndex=0 )
 	return $talkBlock;
 }
 
-if ( ($c = count( $talks )) > 0 )
+if ( ($c = count( $talks )) == 0 )
+{
+?>
+	<p>We have not yet posted the schedule online. Please check back later for more updates.</p>
+<?php
+}
+else
 {
 	echo '<div class="schedule">';
 
