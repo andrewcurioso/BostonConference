@@ -42,10 +42,16 @@ class Talk extends BostonConferenceAppModel {
 				'required' => false,
 			),
 		),
-		'end_time' => array(
-			'datetime' => array(
-				'rule' => array('datetime'),
-				'message' => 'End time must be a valid date and time.',
+		'duration' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'Duration must be a valid number.',
+				'allowEmpty' => true,
+				'required' => false,
+			),
+			'comparison' => array(
+				'rule' => array('comparison','>',0),
+				'message' => 'Duration must be greatre than 0.',
 				'allowEmpty' => true,
 				'required' => false,
 			),
