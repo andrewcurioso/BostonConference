@@ -37,9 +37,9 @@ class SpeakerFixture extends CakeTestFixture {
 			'first_name' => 'Lorem ipsum dolor sit amet',
 			'last_name' => 'Lorem ipsum dolor sit amet',
 			'bio' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
-			'website' => 'Lorem ipsum dolor sit amet',
+			'website' => 'http://www.example.com/',
 			'featured' => 1,
-			'portrait_url' => 'Lorem ipsum dolor sit amet'
+			'portrait_url' => ''
 		),
 	);
 }
