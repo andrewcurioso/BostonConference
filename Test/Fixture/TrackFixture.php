@@ -31,7 +31,7 @@ class TrackFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'name' => 'Lorem ipsum dolor sit amet',
-			'color' => 'Lore',
+			'color' => 'FFF',
 			'position' => 1,
 			'talk_count' => 1,
 			'created' => '2012-05-22 17:38:14',

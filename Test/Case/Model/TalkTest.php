@@ -24,6 +24,14 @@ class TalkTestCase extends CakeTestCase {
 	}
 
 /**
+ * Test save and validation rules
+ *
+ * @returns void
+ */
+	public function testSave() {
+	}
+
+/**
  * tearDown method
  *
  * @return void

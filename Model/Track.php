@@ -36,7 +36,7 @@ class Track extends BostonConferenceAppModel {
 			'colorcode' => array(
 				'rule' => '/^([0-9a-f]{3}){1,2}$/i',
 				'message' => 'Color should be a valid HTML RGB color in hex (no # symbol). Ex: #ff0000.',
-				'allowEmpty' => false,
+				'allowEmpty' => true,
 				'required' => true,
 			),
 		),
