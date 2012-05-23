@@ -162,8 +162,6 @@ h2 {
   float: right;
 }
 
-
-
 .sidebar, #sidebar {
   float: right;
   width: 270px;
@@ -173,6 +171,10 @@ h2 {
 
 #mainContent {
   margin: 0 330px 0 20px;
+}
+
+#content.skinny-sidebar #mainContent {
+	margin-right: 180px;
 }
 
 #footer {
@@ -757,6 +759,7 @@ div.schedule div.time {
 	background-color: #ccc;
 	width: 70px;
 	height: 40px;
+	font-size: 12px;
 }
 
 div.schedule div.time p {
@@ -767,7 +770,7 @@ div.schedule div.time p {
 
 div.schedule div.talk {
 	position: absolute;
-	width: 498px;
+	width: 648px;
 	left: 70px;
 	height: 38px;
 	border: 1px solid #000;
@@ -790,24 +793,41 @@ div.schedule div.talk.minutes-60 {
 }
 
 div.schedule div.talk.double-block {
-	width: 248px;
+	width: 323px;
 }
 
 div.schedule div.talk-2 {
-	left: 320px;
+	left: 395px;
 }
 
 div.schedule div.talk.tripple-block {
-	width: 165px;
+	width: 214px;
 }
 
 div.schedule div.talk.tripple-block.talk-2 {
-	left: 237px;
+	left: 286px;
 }
 
 div.schedule div.talk.tripple-block.talk-3 {
-	left: 404px;
-	width: 164px;
+	left: 502px;
+    	width: 216px;
+}
+
+div.schedule div.talk.quad-block {
+	width: 161px;
+}
+
+div.schedule div.talk.quad-block.talk-2 {
+	left: 233px;
+}
+
+div.schedule div.talk.quad-block.talk-3 {
+	left: 396px;
+}
+
+div.schedule div.talk.quad-block.talk-4 {
+	left: 559px;
+	width: 159px;
 }
 
 div.schedule div.talk p {
