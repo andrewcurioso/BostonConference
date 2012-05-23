@@ -8,6 +8,13 @@ App::uses('BostonConferenceAppController', 'BostonConference.Controller');
 class TalksController extends BostonConferenceAppController {
 
 /**
+ * helpers
+ *
+ * @var array
+ */
+	public $helpers = array('BostonConference.Schedule');
+
+/**
  * index method
  *
  * @return void
