@@ -13,6 +13,17 @@ class Speaker extends BostonConferenceAppModel {
  * @var string
  */
 	public $displayField = 'last_name';
+
+/**
+ * Virtual fields 
+ *
+ * @var array
+ */
+	var $virtualFields = array(
+		'display_name' => 'CONCAT(Speaker.first_name, " ", Speaker.last_name)'
+	);
+
+
 /**
  * Validation rules
  *

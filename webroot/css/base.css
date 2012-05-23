@@ -797,8 +797,26 @@ div.schedule div.talk-2 {
 	left: 320px;
 }
 
+div.schedule div.talk.tripple-block {
+	width: 165px;
+}
+
+div.schedule div.talk.tripple-block.talk-2 {
+	left: 237px;
+}
+
+div.schedule div.talk.tripple-block.talk-3 {
+	left: 404px;
+	width: 164px;
+}
+
 div.schedule div.talk p {
 	padding: 0;
 	margin: 3px;
 	text-align: center;
+}
+
+div.schedule div.talk p span {
+	font-size: 0.8em;
+	white-space: nowrap;
 }
