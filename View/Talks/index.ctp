@@ -51,6 +51,26 @@ function getTalkClass( $duration, $talks, $i )
 	return $class;
 }
 
+function getTalksInBlock( $block, $talks, $startIndex=0 )
+{
+	$talkBlock = array();
+	$c = count($talks);
+
+	for ( $i = $startIndex; $i < $c; $i++ ) {
+		$nextTalk = $talks[$i];
+
+		$tmp = strtotime($nextTalk['Talk']['start_time']);
+		if ( $tmp-(date('i',$tmp)%30*60) == $block ) {
+			$talkBlock[] = $nextTalk;
+		}
+		else {
+			break;
+		}
+	}
+
+	return $talkBlock;
+}
+
 if ( ($c = count( $talks )) > 0 )
 {
 	echo '<div class="schedule">';
@@ -119,27 +139,39 @@ if ( ($c = count( $talks )) > 0 )
 
 
 		// Create an array of talks in this time block
-		$talkBlock = array($talk);
+		$talkBlock = getTalksInBlock($block,$talks,$i);
 
-		for ( $ii = $i+1; $ii < $c; $ii++ ) {
-			$nextTalk = $talks[$ii];
-
-			$tmp = strtotime($nextTalk['Talk']['start_time']);
-			if ( $tmp-(date('i',$tmp)%30*60) == $block ) {
-				if ( $nextTalk['Talk']['duration'] > $talk['Talk']['duration'] )
-					$blockEnd = $block + $nextTalk['Talk']['duration']*60;
-
-				$talkBlock[] = $nextTalk;
-				$i++;
+		if ( count($talkBlock) > 1 )
+		{
+			$workingDuration = $talk['Talk']['duration'];
+			foreach( $talkBlock as $tmpTalk )
+			{
+				if ( $tmpTalk['Talk']['duration'] > $workingDuration ) {
+					$workingDuration = $tmpTalk['Talk']['duration'];
+					$blockEnd = $block + $workingDuration*60;
+				}
 			}
-			else {
-				break;
-			}
+
+			$i += count($talkBlock)-1;
 		}
 
+		// Set the column count if we're not still using the count from
+		// a previous block
+		// This is currently not recursive so it only produces accurate
+		// results if the next blocks do not require additional empty
+		// columns
 		if ( $colCount == 0 )
 		{
 			$colCount = count($talkBlock);
+			$j = 1;
+
+			for ( $b = $block+30*60; $b < $blockEnd; $b += 30*60 ) {
+				$blockCount = count( getTalksInBlock($b,$talks,$i+$j) );
+				$j += $blockCount;
+
+				if ( $blockCount >= $colCount )
+					$colCount = $blockCount+1;
+			}
 		}
 
 		// Echo the time for this block
