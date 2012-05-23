@@ -774,7 +774,7 @@ div.schedule div.day:nth-child(1) {
 div.schedule div.time {
 	float: left;
 	clear: left;
-	background-color: #ccc;
+	background-color: #fff;
 	width: 70px;
 	height: 40px;
 	font-size: 12px;

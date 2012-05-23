@@ -53,6 +53,15 @@ Config.write('BostonConference.organizationName','Acme Inc.');
 Config.write('BostonConference.siteName','A Wicked Awesome Conference');
 ```
 
+### Date and Time
+By default the time is displayed in "g:i a" format so that "13:00" is displayed as "1:00 pm" in the calandar and other places. This format is configurable. So, for example if you want a 24-hour display you would set that in your in your app/Config/core.php file:
+
+```php
+Config.write('BostonConference.timeFormat','H:i');
+```
+
+For more information on date formatting see the [PHP manual page for date](http://us2.php.net/manual/en/function.date.php).
+
 ## Contributing
 You can contribute to the project by forking it on Github and submitting pull requests.
 

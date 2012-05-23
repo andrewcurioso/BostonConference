@@ -8,6 +8,29 @@ App::uses('AppHelper', 'View/Helper');
 class ScheduleHelper extends AppHelper {
 
 /**
+ * Time format (as used in `date`)
+ *
+ * @var string
+ */
+	protected $_timeFormat = 'g:i a';
+
+/**
+ * Default Constructor
+ *
+ * @param View $View The View this helper is being attached to.
+ * @param array $settings Configuration settings for the helper.
+ */
+	public function __construct(View $View, $settings = array()) {
+
+		if ( array_key_exists('timeFormat',$settings) )
+			$this->_timeFormat = $settings['timeFormat'];
+		else if ( $tmp = Configure::read('BostonConference.timeFormat') )
+			$this->_timeFormat = $tmp;
+
+		parent::__construct($View, $settings);
+	}
+
+/**
  * Gets the classes fir a talk element.
  *
  * @param array $talk The talk associative array as returned by the Talk model.
@@ -118,7 +141,7 @@ class ScheduleHelper extends AppHelper {
 				if ( $previousBlock != 0 ) {
 					for ( $b = $previousBlock + 30*60; $b < $blockEnd; $b += 30*60 ) {
 						$output .= '<div class="block">';
-						$output .= '<div class="time"><p>'.date('h:i a',$b).'</p></div>';
+						$output .= '<div class="time"><p>'.date($this->_timeFormat,$b).'</p></div>';
 						$output .= '</div>';
 					}
 					$previousBlock = 0;
@@ -139,7 +162,7 @@ class ScheduleHelper extends AppHelper {
 
 				for ( $b = $previousBlock + 30*60; $b < $block; $b += 30*60 ) {
 					$output .= '<div class="block">';
-					$output .= '<div class="time"><p>'.date('h:i a',$b).'</p></div>';
+					$output .= '<div class="time"><p>'.date($this->_timeFormat,$b).'</p></div>';
 					$output .= '</div>';
 					$emptyBlocks++;
 				}
@@ -202,7 +225,7 @@ class ScheduleHelper extends AppHelper {
 			}
 
 			// Echo the time for this block
-			$output .= '<div class="time"><p>'.date('h:i a',$block).'</p></div>';
+			$output .= '<div class="time"><p>'.date($this->_timeFormat,$block).'</p></div>';
 
 			$col = 0;
 			foreach ( $talkBlock as $ii => $talk ) {
@@ -227,7 +250,7 @@ class ScheduleHelper extends AppHelper {
 		if ( $previousBlock != 0 ) {
 			for ( $b = $previousBlock + 30*60; $b < $blockEnd; $b += 30*60 ) {
 				$output .= '<div class="block">';
-				$output .= '<div class="time"><p>'.date('h:i a',$b).'</p></div>';
+				$output .= '<div class="time"><p>'.date($this->_timeFormat,$b).'</p></div>';
 				$output .= '</div>';
 			}
 		}
