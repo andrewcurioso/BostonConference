@@ -39,7 +39,7 @@ Router::connect(
 
 // Index for plural controllers (more than one per event)
 
-$controllers = array( 'sponsors' );
+$controllers = 'sponsors';
 
 Router::connect(
 	$prefix.'/:controller',
