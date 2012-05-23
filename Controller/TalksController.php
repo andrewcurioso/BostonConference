@@ -7,6 +7,23 @@ App::uses('BostonConferenceAppController', 'BostonConference.Controller');
  */
 class TalksController extends BostonConferenceAppController {
 
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function index() {
+		$tracks = array();
+		$talks = $this->Talk->forCurrentEvent();
+
+		foreach( $talks as $track ) {
+			if ( $track['Track']['id'] )
+				$tracks[$track['Track']['id']] = $track['Track'];
+		}
+
+		$this->set('tracks', array_values($tracks));
+		$this->set('talks', $talks);
+	}
 
 /**
  * admin_index method

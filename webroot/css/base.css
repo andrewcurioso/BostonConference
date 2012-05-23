@@ -734,3 +734,71 @@ a.sponsor-box.diamond:hover,  a.sponsor-box.gold:hover, a.sponsor-box.silver:hov
 .sponsors ul li a {
 	font-weight: normal;
 }
+
+/* schedule */
+
+div.schedule {
+}
+
+div.schedule div.block {
+	position: relative;
+	clear: both;
+}
+
+div.schedule div.day {
+	clear: both;
+	text-align: right;
+	padding: 10px 0 10px 10px;
+}
+
+div.schedule div.time {
+	float: left;
+	clear: left;
+	background-color: #ccc;
+	width: 70px;
+	height: 40px;
+}
+
+div.schedule div.time p {
+	padding: 0;
+	margin: 3px;
+	text-align: right;
+}
+
+div.schedule div.talk {
+	position: absolute;
+	width: 498px;
+	left: 70px;
+	height: 38px;
+	border: 1px solid #000;
+	border-color: #fff #ccc #ccc #fff;
+	background-color: #eee;
+}
+
+div.schedule div.talk.minutes-15 {
+	height: 18px;
+}
+
+div.schedule div.talk.minutes-30 { }
+
+div.schedule div.talk.minutes-45 {
+	height: 58px;
+}
+
+div.schedule div.talk.minutes-60 {
+	height: 78px;
+}
+
+div.schedule div.talk.double-block {
+	width: 248px;
+}
+
+div.schedule div.talk-2 {
+	left: 320px;
+}
+
+div.schedule div.talk p {
+	padding: 0;
+	margin: 3px;
+	text-align: center;
+}
