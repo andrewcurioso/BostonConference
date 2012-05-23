@@ -9,13 +9,22 @@ if ( count( $tracks ) > 0 )
 ?>
 
 <h2>Tracks</h2>
-<ul>
+<ul class="tracks">
 <?php
+
+	$trackCss = "";
 
 	foreach( $tracks as $track )
 	{
-		echo '<li>'.$track['name'].'</li>';
+		echo '<li class="track-'.$track['id'].'">'.$track['name'].'</li>';
+
+		if ( !empty($track['color']) ) {
+			$trackCss .= '#content .track-'.$track['id'].' { background-color: #'.$track['color'].'; } ';
+		}
 	}
+
+	if ( !empty($trackCss) )
+		$this->append('css',$this->Html->tag('style',$trackCss));
 ?>
 </ul>
 <?php
@@ -26,9 +35,9 @@ if ( count( $tracks ) > 0 )
 
 <?php
 
-function getTalkClass( $duration, $talks, $i )
+function getTalkClass( $talk, $talks, $i )
 {
-	$duration = floor($duration/15);
+	$duration = floor($talk['Talk']['duration']/15);
 	$class = '';
 
 	if ( $duration == 0 || $duration == 1 )
@@ -52,6 +61,9 @@ function getTalkClass( $duration, $talks, $i )
 
 	if ( $i > 0 )
 		$class .= ' talk-'.($i+1);
+
+	if ( !empty($talk['Track']['id']) )
+		$class .= ' track-'.$talk['Track']['id'];
 
 	return $class;
 }
@@ -102,7 +114,17 @@ if ( ($c = count( $talks )) > 0 )
 		// Echo the day header if appropriate
 		if ( date('z',$startTime) != $day ) {
 			$day = date('z',$startTime);
-			$previousBlock = 0;
+
+			if ( $previousBlock != 0 ) {
+				for ( $b = $previousBlock + 30*60; $b < $blockEnd; $b += 30*60 ) {
+					echo '<div class="block">';
+					echo '<div class="time"><p>'.date('h:i a',$b).'</p></div>';
+					echo '</div>';
+				}
+				$previousBlock = 0;
+				$colCount = 0;
+				foreach( $blockMap as $key => $val ) $blockMap[$key] = 0;
+			}
 
 			echo '<div class="day">Day '.(++$dayIndex).' - '.date('l, F jS, Y',$startTime).'</div>';
 		}
@@ -187,7 +209,7 @@ if ( ($c = count( $talks )) > 0 )
 			if ( $blockMap[$col] > 0 )
 				$col++;
 
-			echo '<div class="talk '.getTalkClass($talk['Talk']['duration'],$colCount, $col).'"><p>'.$talk['Talk']['topic'];
+			echo '<div class="talk '.getTalkClass($talk,$colCount, $col).'"><p>'.$talk['Talk']['topic'];
 
 			if ( !empty($talk['Speaker']['display_name']) )
 				echo '<span> -&nbsp;'.$talk['Speaker']['display_name'].'</span>';
