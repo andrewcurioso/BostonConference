@@ -1,5 +1,4 @@
 <?php
-
 $this->set('skinny_sidebar',true);
 $this->set('title_for_layout','Schedule');
 

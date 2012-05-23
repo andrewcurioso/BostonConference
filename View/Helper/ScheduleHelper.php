@@ -31,10 +31,10 @@ class ScheduleHelper extends AppHelper {
 	}
 
 /**
- * Gets the classes fir a talk element.
+ * Gets the classes for a talk element.
  *
  * @param array $talk The talk associative array as returned by the Talk model.
- * @param array $talks An array of all talks.
+ * @param int $talks The nu,ber of talks.
  * @param int $i The index of the talk in the current time block.
  * @return string A class string for the talk div.
  */
@@ -73,14 +73,16 @@ class ScheduleHelper extends AppHelper {
 	
 /**
  * Gets all the talks in a particular time block.
+ * Important: This function assumes the talks are sorted by start time.
  *
  * @param int $block The current time block to get talks in.
- * @param array $talks An array of all talks.
+ * @param array $talks An array of all talks sorted by start time.
  * @param int $startIndex The index to start traversing the talk array from.
  * @return array An array of talks.
  */
 	public function getTalksInBlock( $block, $talks, $startIndex=0 )
 	{
+		$started = false;
 		$talkBlock = array();
 		$c = count($talks);
 
@@ -88,10 +90,12 @@ class ScheduleHelper extends AppHelper {
 			$nextTalk = $talks[$i];
 
 			$tmp = strtotime($nextTalk['Talk']['start_time']);
+
 			if ( $tmp-(date('i',$tmp)%30*60) == $block ) {
 				$talkBlock[] = $nextTalk;
+				$started = true;
 			}
-			else {
+			else if ( $started ){
 				break;
 			}
 		}
@@ -101,10 +105,9 @@ class ScheduleHelper extends AppHelper {
 
 /**
  * Gets the HTML for a conference calandar.
+ * Important: This function assumes the talks are sorted by start time.
  *
- * @param int $block The current time block to get talks in.
- * @param array $talks An array of all talks.
- * @param int $startIndex The index to start traversing the talk array from.
+ * @param array $talks An array of all talks sortedby start time.
  * @return string The HTML for the calandar.
  */
 	public function calandar( $talks )
