@@ -33,7 +33,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		?>
 		</div>
 		<div id="contentWrapper">
-			<div id="content">
+			<div id="content"<?php if ( isset($skinny_sidebar) && $skinny_sidebar ) echo ' class="skinny-sidebar"'; ?>>
 				<div id="navigation">
 					<ul>
 					<?php

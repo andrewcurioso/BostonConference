@@ -1,7 +1,11 @@
 <?php
 
+$this->set('skinny_sidebar',true);
+$this->set('title_for_layout','Schedule');
+
 if ( count( $tracks ) > 0 )
 {
+	$this->start('sidebar');
 ?>
 
 <h2>Tracks</h2>
@@ -15,6 +19,7 @@ if ( count( $tracks ) > 0 )
 ?>
 </ul>
 <?php
+	$this->end();
 }
 ?>
 <h2>Schedule</h2>

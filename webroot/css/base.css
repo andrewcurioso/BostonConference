@@ -104,6 +104,10 @@ h2 {
 	width: 920px;
 }
 
+#content.skinny-sidebar {
+	background-position: 760px center;
+}
+
 #navigation {
 	-webkit-border-radius:10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
@@ -150,7 +154,11 @@ h2 {
   right: 0;
   height: 4px;
   width: 310px;
-  background: url("../img/sidebar-bg.png") bottom right;
+  background: url("../img/sidebar-bg.png") left bottom;
+}
+
+#content.skinny-sidebar #navigation div.sidebar-block {
+	width: 160px;
 }
 
 #content .half {
@@ -167,6 +175,11 @@ h2 {
   width: 270px;
   margin: 0 20px 0 0;
   clear: right;
+}
+
+#content.skinny-sidebar .sidebar, #content.skinny-sidebar #sidebar {
+	width: 140px;
+	margin-right: 10px;
 }
 
 #mainContent {
@@ -748,7 +761,7 @@ div.schedule div.block {
 }
 
 div.schedule div.day {
-	clear: both;
+	clear: left;
 	text-align: right;
 	padding: 10px 0 10px 10px;
 }
