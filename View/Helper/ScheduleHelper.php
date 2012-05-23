@@ -1,5 +1,6 @@
 <?php
 App::uses('AppHelper', 'View/Helper');
+App::uses('Sanitize', 'Utility');
 
 /**
  * Schedule helper
@@ -235,10 +236,10 @@ class ScheduleHelper extends AppHelper {
 				if ( $blockMap[$col] > 0 )
 					$col++;
 
-				$output .= '<div class="talk '.$this->getTalkClass($talk,$colCount, $col).'"><p>'.$talk['Talk']['topic'];
+				$output .= '<div class="talk '.$this->getTalkClass($talk,$colCount, $col).'"><p>'.Sanitize::HTML($talk['Talk']['topic']);
 
 				if ( !empty($talk['Speaker']['display_name']) )
-					$output .= '<span> -&nbsp;'.$talk['Speaker']['display_name'].'</span>';
+					$output .= '<span> -&nbsp;'.Sanitize::HTML($talk['Speaker']['display_name']).'</span>';
 
 
 				$output .= '</p></div>';
