@@ -725,3 +725,21 @@ ul.tracks li {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
+
+/* News */
+
+article {
+	position: relative;
+	padding: 0;
+	margin: 0 0 20px 0;
+}
+
+article h2 {
+	padding-right: 200px;
+}
+
+article time {
+	position: absolute;
+	right: 0;
+	top: 10px;
+}

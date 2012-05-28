@@ -11,20 +11,20 @@ if ( $prefix = Configure::read('BostonConference.routePrefix') )
 
 Router::connect(
 	$prefix.'/',
-	array( 'plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'index' )
+	array( 'plugin' => 'BostonConference', 'controller' => 'news', 'action' => 'index' )
 );
 
 // Logout
 Router::connect(
 	$prefix.'/logout',
-	array( 'plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'logout' )
+	array( 'plugin' => 'BostonConference', 'controller' => 'boston_conference', 'action' => 'logout' )
 );
 
 // Admin routing
 
 Router::connect(
 	'/'.$adminPrefix.('/'.$prefix ? $prefix : ''),
-	array( 'plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'index', 'admin' => true )
+	array( 'plugin' => 'BostonConference', 'controller' => 'boston_conference', 'action' => 'index', 'admin' => true )
 );
 
 Router::connect(

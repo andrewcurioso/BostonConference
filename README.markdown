@@ -60,6 +60,13 @@ By default the time is displayed in "g:i a" format so that "13:00" is displayed 
 Config.write('BostonConference.timeFormat','H:i');
 ```
 
+By default the date is displayed in the "l, F jS, Y" format. For example the date "2012/5/1" becomes "Tuesday, May 1st, 2012" in the calander, news, and other places. The format is also configurable. So, for example, to display just "May 1, 2012" you can put the following in your app/Config/core.php file:
+
+
+```php
+Config.write('BostonConference.dateFormat','F j, Y');
+```
+
 For more information on date formatting see the [PHP manual page for date](http://us2.php.net/manual/en/function.date.php).
 
 ## Contributing

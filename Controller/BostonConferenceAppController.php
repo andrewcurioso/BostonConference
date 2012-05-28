@@ -1,5 +1,12 @@
 <?php
 
+if ( !Configure::read('BostonConference.timeFormat') )
+	Configure::write('BostonConference.timeFormat', 'g:a i');
+
+if ( !Configure::read('BostonConference.dateFormat') )
+	Configure::write('BostonConference.dateFormat', 'l, F jS, Y');
+
+
 class BostonConferenceAppController extends AppController {
 
 /**
@@ -36,10 +43,14 @@ class BostonConferenceAppController extends AppController {
 	protected function _createDefaultNavigationLinks() {
 		$isAdmin = $this->params['admin'];
 
-		$this->addNavigationLink('Home',array('plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'index'));
 
-		if ( $isAdmin )
+		if ( $isAdmin ) {
+			$this->addNavigationLink('Home',array('plugin' => 'BostonConference', 'controller' => 'boston_conference', 'action' => 'index'));
 			$this->addNavigationLink('Events',array('plugin' => 'BostonConference', 'controller' => 'events', 'action' => 'index'));
+			$this->addNavigationLink('News',array('plugin' => 'BostonConference', 'controller' => 'news', 'action' => 'index'));
+		} else {
+			$this->addNavigationLink('Home',array('plugin' => 'BostonConference', 'controller' => 'news', 'action' => 'index'));
+		}
 
 		$this->addNavigationLink('Schedule',array('plugin' => 'BostonConference', 'controller' => 'talks', 'action' => 'index'));
 

@@ -1,0 +1,24 @@
+<?php
+
+$this->set('title_for_layout','Home');
+
+if ( count( $news ) > 0 )
+{
+	foreach ($news as $news)
+	{
+?>
+<article>
+	<h2><?php echo h($news['News']['title']); ?>&nbsp;</h2>
+	<time><?php echo date(Configure::read('BostonConference.dateFormat'),strtotime($news['News']['created'])); ?>&nbsp;</time>
+	<p><?php echo h($news['News']['body']); ?>&nbsp;</p>
+</article>
+<?php
+	}
+}
+else
+{
+?>
+<p>Please check back later for the latest news and updates.</p>
+<?php
+}
+?>
