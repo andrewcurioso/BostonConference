@@ -44,10 +44,10 @@ $this->start('sidebar');
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Sponsorship Level'), array('action' => 'edit', $sponsorshipLevel['SponsorshipLevel']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Sponsorship Level'), array('action' => 'delete', $sponsorshipLevel['SponsorshipLevel']['id']), null, __('Are you sure you want to delete # %s?', $sponsorshipLevel['SponsorshipLevel']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Sponsorship Levels'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Sponsorship Level'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit Level'), array('action' => 'edit', $sponsorshipLevel['SponsorshipLevel']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete Level'), array('action' => 'delete', $sponsorshipLevel['SponsorshipLevel']['id']), null, __('Are you sure you want to delete # %s?', $sponsorshipLevel['SponsorshipLevel']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('List Levels'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Level'), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Events'), array('controller' => 'events', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Event'), array('controller' => 'events', 'action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Sponsors'), array('controller' => 'sponsors', 'action' => 'index')); ?> </li>

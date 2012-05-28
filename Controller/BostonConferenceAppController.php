@@ -21,6 +21,11 @@ class BostonConferenceAppController extends AppController {
 
 		$this->_createDefaultNavigationLinks();
 		$this->_populateAuthData();
+
+
+		if ( $this->params['admin'] ) {
+			$this->set('skinny_sidebar',true);
+		}
 	}
 
 /**

@@ -24,8 +24,8 @@ $this->start('sidebar');
 	<ul>
 
 		<li><?php echo $this->Html->link(__('List Sponsors'), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Sponsorship Levels'), array('controller' => 'sponsorship_levels', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Sponsorship Level'), array('controller' => 'sponsorship_levels', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Levels'), array('controller' => 'sponsorship_levels', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Level'), array('controller' => 'sponsorship_levels', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 <?php

@@ -27,8 +27,8 @@ $this->start('sidebar');
 
 		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Sponsor.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Sponsor.id'))); ?></li>
 		<li><?php echo $this->Html->link(__('List Sponsors'), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Sponsorship Levels'), array('controller' => 'sponsorship_levels', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Sponsorship Level'), array('controller' => 'sponsorship_levels', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Levels'), array('controller' => 'sponsorship_levels', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Level'), array('controller' => 'sponsorship_levels', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 <?php
