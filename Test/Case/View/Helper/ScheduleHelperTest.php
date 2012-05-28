@@ -184,4 +184,33 @@ class ScheduleHelperTest extends CakeTestCase {
 		$this->assertContains(date('H:i Y',$t), $result);
 	}
 
+/**
+ * Test the date format options.
+ *
+ * @return void
+ */
+	public function testCalandarDateFormat() {
+		$validData = array(
+			$this->_sampleTalk
+		);
+
+		$t = strtotime($this->_sampleTalk['Talk']['start_time']);
+
+		// Default
+		$result = $this->Schedule->calandar($validData);
+		$this->assertContains(date('l, F jS, Y',$t), $result);
+
+		// Via configuration variable
+		Configure::write('BostonConference.dateFormat','F j, Y');
+		$Schedule = new ScheduleHelper( $this->View );
+		$result = $Schedule->calandar($validData);
+		$this->assertContains(date('F j, Y',$t), $result);
+
+		Configure::write('BostonConference.dateFormat',false);
+
+		// Via constructor
+		$Schedule = new ScheduleHelper( $this->View, array('dateFormat' => 'F j, Y') );
+		$result = $Schedule->calandar($validData);
+		$this->assertContains(date('F j, Y',$t), $result);
+	}
 }
