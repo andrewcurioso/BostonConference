@@ -16,6 +16,13 @@ class ScheduleHelper extends AppHelper {
 	protected $_timeFormat = 'g:i a';
 
 /**
+ * Date format (as used in `date`)
+ *
+ * @var string
+ */
+	protected $_dateFormat = 'l, F jS, Y';
+
+/**
  * Default Constructor
  *
  * @param View $View The View this helper is being attached to.
@@ -27,6 +34,11 @@ class ScheduleHelper extends AppHelper {
 			$this->_timeFormat = $settings['timeFormat'];
 		else if ( $tmp = Configure::read('BostonConference.timeFormat') )
 			$this->_timeFormat = $tmp;
+
+		if ( array_key_exists('dateFormat',$settings) )
+			$this->_dateFormat = $settings['dateFormat'];
+		else if ( $tmp = Configure::read('BostonConference.dateFormat') )
+			$this->_dateFormat = $tmp;
 
 		parent::__construct($View, $settings);
 	}
@@ -153,7 +165,7 @@ class ScheduleHelper extends AppHelper {
 					foreach( $blockMap as $key => $val ) $blockMap[$key] = 0;
 				}
 
-				$output .= '<div class="day">Day '.(++$dayIndex).' - '.date('l, F jS, Y',$startTime).'</div>';
+				$output .= '<div class="day">Day '.(++$dayIndex).' - '.date($this->_dateFormat,$startTime).'</div>';
 			}
 
 			// Calulate the current block

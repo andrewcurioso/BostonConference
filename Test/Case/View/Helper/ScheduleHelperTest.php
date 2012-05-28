@@ -75,6 +75,7 @@ class ScheduleHelperTest extends CakeTestCase {
 		parent::setUp();
 
 		Configure::write('BostonConference.timeFormat',false);
+		Configure::write('BostonConference.dateFormat',false);
 
 		$Controller = new Controller();
 		$this->View = new View($Controller);
@@ -163,21 +164,24 @@ class ScheduleHelperTest extends CakeTestCase {
 			$this->_sampleTalk
 		);
 
+		$t = strtotime($this->_sampleTalk['Talk']['start_time']);
+
 		// Default
 		$result = $this->Schedule->calandar($validData);
-		$this->assertContains('9:00 am', $result);
+		$this->assertContains(date('g:i a',$t), $result);
 
 		// Via configuration variable
 		Configure::write('BostonConference.timeFormat','H:i');
 		$Schedule = new ScheduleHelper( $this->View );
 		$result = $Schedule->calandar($validData);
-		$this->assertContains('09:00', $result);
+		$this->assertContains(date('H:i',$t), $result);
 
 		Configure::write('BostonConference.timeFormat',false);
 
 		// Via constructor
 		$Schedule = new ScheduleHelper( $this->View, array('timeFormat' => 'H:i Y') );
 		$result = $Schedule->calandar($validData);
-		$this->assertContains('09:00 2012', $result);
+		$this->assertContains(date('H:i Y',$t), $result);
 	}
+
 }
