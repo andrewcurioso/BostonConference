@@ -4,7 +4,7 @@ $this->set('title_for_layout','Schedule');
 
 if ( count( $tracks ) > 0 )
 {
-	$this->start('sidebar');
+	$this->append('sidebar');
 ?>
 
 <h2>Tracks</h2>

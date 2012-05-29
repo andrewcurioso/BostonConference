@@ -1,7 +1,7 @@
 <?php
 $this->set('title_for_layout','Conference Administration');
 
-$this->start('sidebar');
+$this->append('sidebar');
 
 $this->end('sidebar');
 ?>

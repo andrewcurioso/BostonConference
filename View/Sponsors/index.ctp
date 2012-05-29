@@ -1,5 +1,5 @@
 <?php
-$this->start('sidebar');
+$this->append('sidebar');
 ?>
 <div class="actions">
 	<p>We're still looking for sponsors at all budget levels.</p>

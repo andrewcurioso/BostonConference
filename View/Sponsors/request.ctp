@@ -1,5 +1,5 @@
 <?php
-$this->start('sidebar');
+$this->append('sidebar');
 ?>
   <h2>Thank You For Your Interest</h2>
 

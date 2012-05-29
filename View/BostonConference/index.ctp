@@ -1,7 +1,7 @@
 <?php
 $this->set('title_for_layout','Home');
 
-$this->start('sidebar');
+$this->append('sidebar');
 ?>
 <h2>Next Steps</h2>
 <ol>

@@ -6,7 +6,7 @@ if ( $venue ) {
 
 	$address = $venue['Venue']['address'];
 
-	$this->start('sidebar');
+	$this->append('sidebar');
 
 	if ( $address ) {
 		$flatAddress = htmlentities(urlencode(str_replace("\n",',',$address)));

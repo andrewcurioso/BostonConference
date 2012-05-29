@@ -39,7 +39,7 @@
 	</dl>
 </div>
 <?
-$this->start('sidebar');
+$this->append('sidebar');
 ?>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
