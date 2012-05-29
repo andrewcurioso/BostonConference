@@ -271,7 +271,7 @@ class ScheduleHelper extends AppHelper {
 			}
 		}
 
-
+		$output .= '<div style="clear: left;"></div>';
 		$output .= '</div>';
 
 		return $output;

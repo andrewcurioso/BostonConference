@@ -606,11 +606,12 @@ a.sponsor-box.diamond:hover,  a.sponsor-box.gold:hover, a.sponsor-box.silver:hov
 /* schedule */
 
 div.schedule {
+	margin-bottom: 20px;
 }
 
 div.schedule div.block {
 	position: relative;
-	clear: both;
+	clear: left;
 }
 
 div.schedule div.day {
