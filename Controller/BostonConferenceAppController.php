@@ -29,6 +29,7 @@ class BostonConferenceAppController extends AppController {
 		$this->_createDefaultNavigationLinks();
 		$this->_populateAuthData();
 
+		$this->set('is_admin_area',$this->params['admin']);
 
 		if ( $this->params['admin'] ) {
 			$this->set('skinny_sidebar',true);
@@ -42,7 +43,6 @@ class BostonConferenceAppController extends AppController {
  */
 	protected function _createDefaultNavigationLinks() {
 		$isAdmin = $this->params['admin'];
-
 
 		if ( $isAdmin ) {
 			$this->addNavigationLink('Home',array('plugin' => 'BostonConference', 'controller' => 'boston_conference', 'action' => 'index'));
@@ -105,6 +105,8 @@ class BostonConferenceAppController extends AppController {
  */
 	public function beforeRender() {
 		$this->set('navigation_links',$this->navigationLinks);
+		$this->set('element_path', array( preg_replace('/Controller$/','',get_class($this)), $this->action ));
+
 		return parent::beforeRender();
 	}
 

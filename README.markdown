@@ -69,6 +69,60 @@ Config.write('BostonConference.dateFormat','F j, Y');
 
 For more information on date formatting see the [PHP manual page for date](http://us2.php.net/manual/en/function.date.php).
 
+## Customizing Views
+
+### Adding Content Using Elements
+You can easily include more content onto the page via elements. Elements can be included in all pages or only specific pages.
+
+First, create an element in your app/View/Elements directory. An element is just like a normal CakePHP view and should have a ".ctp" extension.
+
+You can include an element on all pages in the conference by setting a configuration variable in your app/Config/core.php file. For example, say your element is in the file "app/Elements/Welcome.ctp" and it is in your core CakePHP application (not a plugin):
+
+```php
+Configure::write('BostonConference.Elements',array('app.Welcome'));
+```
+
+You can also include an element only on specific pages. For example, to include it only on the News index page (the default homepage for the event):
+
+```php
+Configure::write('BostonConference.Elements.News.index',array('app.Welcome'))
+```
+
+Or to include it on all pages in the News controller:
+
+```php
+Configure::write('BostonConference.Elements.News',array('app.Welcome'))
+```
+
+The order you include your elements matters. For example, if you specify "BostonConference.Elements.News" after "BostonConference.Elements.News.index" in your configuration then the index will be overriden. The easiest way to ensure the desired behavior is to specify all elements at once:
+
+```php
+Configure::write('BostonConference.Elements', array(
+  'Welcome',
+  'News' => array( 'NewsHeader' )
+));
+```
+
+It is also worth noting that elements are not included on administration pages.
+
+Elements will appear in the order they are defined; however, higher specificity elements always included after the lower specificity elements. In other words, an element that should be included on all pages will be included before an element that is only on a specific page.
+
+By default the text in the elemnt appears after the content of the page (but before the footer). To have more control over the content placement you can use blocks. For example, to make the content appear before the sidebar you can use the "pre-sidebar" block like so:
+
+```php
+$this->append('pre-sidebar');
+<p>This is some content.</p>
+$this->end();
+```
+
+The allowed blocks are:
+
+* pre-sidebar
+* sidebar
+* post-sidebar
+* pre-content
+* post-content
+
 ## Contributing
 You can contribute to the project by forking it on Github and submitting pull requests.
 

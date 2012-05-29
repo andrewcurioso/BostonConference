@@ -2,6 +2,34 @@
 
 $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 
+$elements = Configure::read('BostonConference.Elements');
+
+function includeElements( View $view, $element, $path )
+{
+	if ( is_string($element) )
+	{
+		echo $view->element($element);
+	}
+	else if ( is_array($element) && count($path) > 0 )
+	{
+		foreach ( $element as $i => $child )
+		{
+			if ( is_int($i) )
+				includeElements($view, $child, $path);
+		}
+
+		if ( array_key_exists(array_shift($path),$element) )
+			includeElements($view, $child, $path);
+	}
+}
+
+if ( $elements && !$is_admin_area )
+{
+	$this->start('post-content');
+	includeElements($this, $elements, $element_path);
+	$this->end();
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,13 +87,23 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					</ul>
 					<div class="sidebar-block"> </div>
 				</div>
+<?php
 
+?>
 				<div id="sidebar">
-					<?php echo $this->fetch('sidebar'); ?>
+					<?php
+						echo $this->fetch('pre-sidebar');
+						echo $this->fetch('sidebar');
+						echo $this->fetch('post-sidebar');
+					?>
 				</div>
 				<div id="mainContent">
-					<?php echo $this->Session->flash(); ?>
-					<?php echo $this->fetch('content'); ?>
+					<?php
+						echo $this->Session->flash();
+						echo $this->fetch('pre-content');
+						echo $this->fetch('content');
+						echo $this->fetch('post-content');
+					?>
 				</div>
 			</div>
 		</div>
