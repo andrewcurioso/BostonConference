@@ -42,7 +42,6 @@ if ( $elements && !$is_admin_area )
 		echo $this->fetch('meta');
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('/boston_conference/css/base.css');
 
 		echo $this->fetch('css');
@@ -55,7 +54,7 @@ if ( $elements && !$is_admin_area )
 		<?php
 			echo $this->Html->link(
 				$this->Html->image('/boston_conference/img/logo.png', array('alt'=> Configure::read('BostonConference.siteName'), 'border' => '0')),
-				array('plugin' => 'BostonConference', 'controller' => 'BostonConference', 'action' => 'index'),
+				array('plugin' => 'BostonConference', 'controller' => 'news', 'action' => 'index'),
 				array('escape' => false)
 			);
 		?>

@@ -71,6 +71,17 @@ For more information on date formatting see the [PHP manual page for date](http:
 
 ## Customizing Views
 
+### Changing The Logo, Images, or CSS
+You can change the logo or image by create a folder "CAKE/app/webroot/boston_conference" then creating a file of the same name as the file in the plugin. For example, to change the logo you could create a filder called "img" and place a "logo.png" file into it.
+
+Unless you plan on changing the entire structure of the CSS, it is not recommended that you replace the stylesheet entirely. Doing so will cause upgrades in the CSS to potentially break. If you look at the "base.css" file in the plugin you may notice that the plugin also imports the CakePHP stylesheet as well.
+
+Instead, create a new element to embed on every page (see the next section) and add a line of code similar to this (where "mystyle.css" is the name of a stylesheet you created in your webroot):
+
+```php
+$this->Html->css('mystyle.css', null, array('inline' => false));
+```
+
 ### Adding Content Using Elements
 You can easily include more content onto the page via elements. Elements can be included in all pages or only specific pages.
 
