@@ -23,10 +23,10 @@ function includeElements( View $view, $element, $path )
 	}
 }
 
-if ( $elements && !$is_admin_area )
+if ( $elements && ( !isset($is_admin_area) || !$is_admin_area ) )
 {
 	$this->start('post-content');
-	includeElements($this, $elements, $element_path);
+	includeElements($this, $elements, isset($element_path) ? $element_path : array() );
 	$this->end();
 }
 
