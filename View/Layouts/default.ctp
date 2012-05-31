@@ -10,7 +10,7 @@ function includeElements( View $view, $element, $path )
 	{
 		echo $view->element($element);
 	}
-	else if ( is_array($element) && count($path) > 0 )
+	else if ( is_array($element) && count($element) > 0 )
 	{
 		foreach ( $element as $i => $child )
 		{
@@ -25,6 +25,7 @@ function includeElements( View $view, $element, $path )
 
 if ( $elements && !$is_admin_area )
 {
+pr($elements);
 	$this->start('post-content');
 	includeElements($this, $elements, $element_path);
 	$this->end();

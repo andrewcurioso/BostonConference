@@ -7,7 +7,7 @@ if ( !Configure::read('BostonConference.dateFormat') )
 	Configure::write('BostonConference.dateFormat', 'l, F jS, Y');
 
 if ( !Configure::read('BostonConference.Elements') )
-	Configure::write('BostonConference.Elements', array('Welcome'));
+	Configure::write('BostonConference.Elements.News.index', array('Welcome'));
 
 
 class BostonConferenceAppController extends AppController {
