@@ -20,18 +20,21 @@ User management and access control is designed to be done at the app level in Ca
 ## Installation
 Installing the Boston Conference Management system is quick and easy.
 
-1. Install [CakePHP 2.1][cakephp]
-2. Copy the BostonConference directory into your CAKE/app/Plugins directory
-3. Open up your Config/bootstrap.php and register the Plugin
-4. Install the schema with `cake schema create -P BostonConference`
+1. Install [CakePHP 2.1][cakephp]. Configure it, with no errors, and set it up with an empty database.
+2. Disable the loading of CakePHP default routes in CAKE/app/Config/routes.php. Just comment the line out.
+3. Remove all the two predefined default routes ('/' & '/pages/*') found in CAKE/app/Config/routes.php. Just comment these lines out.
+4. Enable admin prefix routing in CAKE/app/core.php. Just uncomment the line.
+5. Copy the BostonConference directory into your CAKE/app/Plugins directory.
+6. Open up your CAKE/app/Config/bootstrap.php and load the Plugin. See the sample code below.
+7. Install the schema with `cake schema create -p BostonConference`
 
-In app/Config/bootstrap.php
+In CAKE/app/Config/bootstrap.php
 
 ```php
 CakePlugin::load('BostonConference', array('routes' => true));
 ```
 
-You can then test it by going to your domain.
+You can then test it by going to your domain. You should see a welcome message and the Boston Conference UI.
 
 ## Configuring
 The Boston Conference Management System is extremely configurable. You should never have to edit the Controllers or Models at all.
@@ -42,29 +45,29 @@ By default the plugin maps itself to your CakePHP root directory. To change this
 In your app/Config/core.php file:
 
 ```php
-Config.write('BostonConference.routePrefix','events');
+Configure::write('BostonConference.routePrefix','events');
 ```
 
 ### Site and Organization Name
 You'll probably want to have a site and organization name specified. The organization name is the name of the company or organization coordinating the event and the site name is what appears in the title bar and various other places. For example, in your app/Config/core.php file:
 
 ```php
-Config.write('BostonConference.organizationName','Acme Inc.');
-Config.write('BostonConference.siteName','A Wicked Awesome Conference');
+Configure::write('BostonConference.organizationName','Acme Inc.');
+Configure::write('BostonConference.siteName','A Wicked Awesome Conference');
 ```
 
 ### Date and Time
 By default the time is displayed in "g:i a" format so that "13:00" is displayed as "1:00 pm" in the calandar and other places. This format is configurable. So, for example if you want a 24-hour display you would set that in your in your app/Config/core.php file:
 
 ```php
-Config.write('BostonConference.timeFormat','H:i');
+Configure::write('BostonConference.timeFormat','H:i');
 ```
 
 By default the date is displayed in the "l, F jS, Y" format. For example the date "2012/5/1" becomes "Tuesday, May 1st, 2012" in the calander, news, and other places. The format is also configurable. So, for example, to display just "May 1, 2012" you can put the following in your app/Config/core.php file:
 
 
 ```php
-Config.write('BostonConference.dateFormat','F j, Y');
+Configure::write('BostonConference.dateFormat','F j, Y');
 ```
 
 For more information on date formatting see the [PHP manual page for date](http://us2.php.net/manual/en/function.date.php).
