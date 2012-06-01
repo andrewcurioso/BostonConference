@@ -117,7 +117,7 @@ Configure::write('BostonConference.Elements', array(
 ));
 ```
 
-It is also worth noting that elements are not included on administration pages.
+It is also worth noting that elements are not included on administration pages. If you wish to include an element on an admin page than change "BostonConference.Elements" to "BostonConference.Elements.Admin" instead.
 
 Elements will appear in the order they are defined; however, higher specificity elements always included after the lower specificity elements. In other words, an element that should be included on all pages will be included before an element that is only on a specific page.
 
