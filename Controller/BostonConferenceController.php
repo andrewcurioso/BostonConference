@@ -50,7 +50,7 @@ class BostonConferenceController extends BostonConferenceAppController {
 		if ( property_exists($this,'Auth') )
 			$this->redirect($this->Auth->logout());
 		else
-			$this->redirect(array('index'));
+			$this->redirect(array('plugin' => 'BostonConference','news','index'));
 	}
 
 }
