@@ -6,9 +6,6 @@ $elements = Configure::read('BostonConference.Elements');
 
 function includeElements( View $view, $element, $path )
 {
-	debug('exec');
-	pr( $path );
-	pr( $element );
 	if ( is_string($element) )
 	{
 		echo $view->element($element);
