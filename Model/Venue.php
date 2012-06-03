@@ -28,8 +28,8 @@ class Venue extends BostonConferenceAppModel {
 		),
 		'website' => array(
 			'maxlength' => array(
-				'rule' => array('maxlength',64),
-				'message' => 'Venue website cannot excede 64 characters',
+				'rule' => array('maxlength',128),
+				'message' => 'Venue website cannot excede 128 characters',
 				'allowEmpty' => true,
 				'required' => true
 			),

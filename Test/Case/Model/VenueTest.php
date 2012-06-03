@@ -46,7 +46,7 @@ class VenueTestCase extends CakeTestCase {
 		$this->assertEquals(array('name'),array_keys($this->Venue->validationErrors));
 
 		// Website is too long
-		$result = $this->Venue->save(array_merge($validData,array('website' => str_pad($validData['website'],65,'a'))));
+		$result = $this->Venue->save(array_merge($validData,array('website' => str_pad($validData['website'],129,'a'))));
 		$this->assertFalse($result);
 		$this->assertEquals(array('website'),array_keys($this->Venue->validationErrors));
 
