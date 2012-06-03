@@ -761,3 +761,21 @@ article time {
 	right: 0;
 	top: 10px;
 }
+
+/* Editor */
+
+.wysiwyg-toolbar {
+	padding: 0;
+	margin: 10px 0;
+}
+
+.wysiwyg-toolbar a {
+	font-weight: normal;
+	padding: 5px;
+	margin: 0 5px 0 0;
+	border: 1px solid #ccc;
+}
+
+.wysiwyg-toolbar a.wysihtml5-command-active {
+	background-color: #ccc;
+}

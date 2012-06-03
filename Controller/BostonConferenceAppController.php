@@ -13,6 +13,13 @@ if ( !Configure::read('BostonConference.Elements') )
 class BostonConferenceAppController extends AppController {
 
 /**
+ * helpers
+ *
+ * @var array
+ */
+	public $helpers = array('BostonConference.ContentManagement');
+
+/**
  * navigationLinks
  *
  * @var array

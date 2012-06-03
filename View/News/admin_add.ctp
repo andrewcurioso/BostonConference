@@ -4,7 +4,7 @@
 		<legend><?php echo __('Admin Add News'); ?></legend>
 	<?php
 		echo $this->Form->input('title');
-		echo $this->Form->input('body');
+		echo $this->ContentManagement->richtext('News.body');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
