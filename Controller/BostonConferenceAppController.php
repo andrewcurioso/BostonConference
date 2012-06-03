@@ -85,7 +85,7 @@ class BostonConferenceAppController extends AppController {
 		$a = array();
 
 		if ( $this->Auth->loggedIn() ) {
-			$a['logout_url'] = array( 'plugin' => 'BostonConference', 'controller' => 'boston_conference', 'action' => 'logout' );
+			$a['logout_url'] = array( 'plugin' => 'BostonConference', 'controller' => 'boston_conference', 'action' => 'logout', 'admin' => false );
 			$a['greeting'] = Configure::read('BostonConference.greeting');
 		} else {
 			$a['login_url'] = $this->Auth->loginAction;
