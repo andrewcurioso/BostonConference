@@ -66,7 +66,19 @@ if ( $elements )
 		?>
 		</div>
 		<div id="contentWrapper">
-			<div id="content"<?php if ( isset($skinny_sidebar) && $skinny_sidebar ) echo ' class="skinny-sidebar"'; ?>>
+<?php
+
+$sidebar_content = $this->fetch('pre-sidebar').$this->fetch('sidebar').$this->fetch('post-sidebar');
+
+$content_class = '';
+
+if ( preg_match('/[^\s]/',$sidebar_content) == 0 )
+	$content_class = 'no-sidebar';
+else if ( isset($skinny_sidebar) && $skinny_sidebar )
+	$content_class = 'skinny-sidebar';
+
+?>
+			<div id="content" class="<?php echo $content_class; ?>">
 				<div id="navigation">
 					<ul>
 					<?php
@@ -97,9 +109,7 @@ if ( $elements )
 ?>
 				<div id="sidebar">
 					<?php
-						echo $this->fetch('pre-sidebar');
-						echo $this->fetch('sidebar');
-						echo $this->fetch('post-sidebar');
+						echo $sidebar_content;
 					?>
 				</div>
 				<div id="mainContent">

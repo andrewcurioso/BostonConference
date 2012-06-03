@@ -110,6 +110,10 @@ h2 {
 	background-position: 760px center;
 }
 
+#content.no-sidebar {
+	background-image: none;
+}
+
 #navigation {
 	-webkit-border-radius:10px 10px 0 0;
 	-moz-border-radius: 10px 10px 0 0;
@@ -159,6 +163,9 @@ h2 {
   background: url("../img/sidebar-bg.png") left bottom;
 }
 
+#content.no-sidebar #navigation div.sidebar-block {
+	display: none;
+}
 #content.skinny-sidebar #navigation div.sidebar-block {
 	width: 160px;
 }
@@ -184,8 +191,16 @@ h2 {
 	margin-right: 10px;
 }
 
+#content.no-sidebar #sidebar {
+	display: none;
+}
+
 #mainContent {
-  margin: 0 330px 0 20px;
+	margin: 0 330px 0 20px;
+}
+
+#content.no-sidebar #mainContent {
+	margin-right: 20px;
 }
 
 #content.skinny-sidebar #mainContent {
