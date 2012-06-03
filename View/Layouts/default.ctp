@@ -6,6 +6,9 @@ $elements = Configure::read('BostonConference.Elements');
 
 function includeElements( View $view, $element, $path )
 {
+	debug('exec');
+	pr( $path );
+	pr( $element );
 	if ( is_string($element) )
 	{
 		echo $view->element($element);
@@ -18,8 +21,11 @@ function includeElements( View $view, $element, $path )
 				includeElements($view, $child, $path);
 		}
 
-		if ( array_key_exists(array_shift($path),$element) )
-			includeElements($view, $child, $path);
+		if ( count($path) > 0 && array_key_exists($path[0],$element) )
+		{
+			$childPath = $path;
+			includeElements($view, $element[array_shift($childPath)], $childPath);
+		}
 	}
 }
 
