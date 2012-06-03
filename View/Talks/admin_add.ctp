@@ -30,7 +30,7 @@
 		echo $this->Form->input('start_time',$dateOptions);
 		echo $this->Form->input('duration',$durationOptions);
 		echo $this->Form->input('approved');
-		echo $this->Form->input('track_id');
+		echo $this->Form->input('track_id',array('empty'=>true));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>

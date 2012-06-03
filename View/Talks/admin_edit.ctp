@@ -4,7 +4,7 @@
 		<legend><?php echo __('Admin Edit Talk'); ?></legend>
 	<?php
 		$minYear = date('Y');
-		if ( $this->data['start_time'] && ($y = date('Y',strtotime($this->data['Talk']['start_time']))) < $minYear )
+		if ( $this->data['Talk']['start_time'] && ($y = date('Y',strtotime($this->data['Talk']['start_time']))) < $minYear )
 			$minYear = $y;
 		$maxYear = date('Y') + 1;
 
@@ -28,11 +28,11 @@
 		echo $this->Form->input('event_id');
 		echo $this->Form->input('speaker_id');
 		echo $this->Form->input('topic');
-		echo $this->Form->input('abstract');
+		echo $this->ContentManagement->richtext('Talk.abstract');
 		echo $this->Form->input('start_time',$dateOptions);
 		echo $this->Form->input('duration',$durationOptions);
 		echo $this->Form->input('approved');
-		echo $this->Form->input('track_id');
+		echo $this->Form->input('track_id',array('empty'=>true));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
