@@ -578,6 +578,12 @@ a.sponsor-box.diamond, a.sponsor-box.gold, a.sponsor-box.silver {
 	text-decoration: none;
 }
 
+a.sponsor-box.diamond img, a.sponsor-box.gold img, a.sponsor-box.silver img {
+	border: none;
+	max-width: 100%;
+	max-height: 100%;
+}
+
 a.sponsor-box.diamond {
 	width: 270px;
 	height: 170px;
