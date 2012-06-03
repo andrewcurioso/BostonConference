@@ -46,7 +46,7 @@ class HotelTestCase extends CakeTestCase {
 		$this->assertEquals(array('name'),array_keys($this->Hotel->validationErrors));
 
 		// Website is too long
-		$result = $this->Hotel->save(array_merge($validData,array('website' => str_pad($validData['website'],65,'a'))));
+		$result = $this->Hotel->save(array_merge($validData,array('website' => str_pad($validData['website'],129,'a'))));
 		$this->assertFalse($result);
 		$this->assertEquals(array('website'),array_keys($this->Hotel->validationErrors));
 

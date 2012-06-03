@@ -26,8 +26,8 @@ class Hotel extends BostonConferenceAppModel {
 				'required' => true,
 			),
 			'maxlength' => array(
-				'rule' => array('maxlength',64),
-				'message' => 'Hotel name cannot exceed 64 characters',
+				'rule' => array('maxlength',128),
+				'message' => 'Hotel name cannot exceed 128 characters',
 				'allowEmpty' => false,
 				'required' => true,
 			),
