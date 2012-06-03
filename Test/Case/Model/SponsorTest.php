@@ -13,7 +13,8 @@ class SponsorTestCase extends CakeTestCase {
  */
 	public $fixtures = array(
 				'plugin.boston_conference.sponsor',
-				'plugin.boston_conference.sponsorship_level'
+				'plugin.boston_conference.sponsorship_level',
+				'plugin.boston_conference.event'
 				);
 
 /**
@@ -94,11 +95,6 @@ class SponsorTestCase extends CakeTestCase {
 		$result = $this->Sponsor->save(array_merge($data,array('contact_email' => str_pad($data['contact_email'],65,'1',STR_PAD_LEFT))));
 		$this->assertFalse($result);
 		$this->assertEquals(array('contact_email'),array_keys($this->Sponsor->validationErrors));
-
-		// Contact phone empty
-		$result = $this->Sponsor->save(array_merge($data,array('contact_phone' => '' )));
-		$this->assertFalse($result);
-		$this->assertEquals(array('contact_phone'),array_keys($this->Sponsor->validationErrors));
 
 		// Contact phone too long
 		$result = $this->Sponsor->save(array_merge($data,array('contact_phone' => str_pad($data['contact_phone'],17,'1',STR_PAD_LEFT))));

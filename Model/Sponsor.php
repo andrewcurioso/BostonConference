@@ -83,17 +83,11 @@ class Sponsor extends BostonConferenceAppModel {
 			),
 		),
 		'contact_phone' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				'message' => 'Contact phone is required',
-				'allowEmpty' => false,
-				'required' => true
-			),
 			'maxlength' => array(
 				'rule' => array('maxlength',16),
 				'message' => 'Contact pone cannot excede 16 characters',
-				'allowEmpty' => false,
-				'required' => true
+				'allowEmpty' => true,
+				'required' => false
 			),
 		),
 		'budget' => array(
