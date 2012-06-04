@@ -29,12 +29,12 @@ if ( count( $tracks ) > 0 )
 <?php
 	$this->end();
 }
+
+$this->append('header');
 ?>
 <h2>Schedule</h2>
-
 <?php
-
-
+$this->end();
 
 if ( count( $talks ) == 0 )
 {

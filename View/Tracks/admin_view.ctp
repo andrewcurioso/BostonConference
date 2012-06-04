@@ -1,5 +1,13 @@
+<?php
+$this->append('header')
+?>
 <div class="tracks view">
-<h2><?php  echo __('Track');?></h2>
+	<h2><?php  echo __('Track');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="tracks view">
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>

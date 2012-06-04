@@ -1,5 +1,5 @@
 <?php
-$this->append('before-content');
+$this->append('before-header');
 ?>
 <h2>Welcome</h2>
 

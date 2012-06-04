@@ -1,5 +1,13 @@
+<?php
+$this->append('header')
+?>
 <div class="tracks index">
 	<h2><?php echo __('Tracks');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="tracks index">
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>

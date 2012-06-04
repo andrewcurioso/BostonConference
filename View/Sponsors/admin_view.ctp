@@ -1,5 +1,13 @@
+<?php
+$this->append('header')
+?>
 <div class="sponsors view">
-<h2><?php  echo __('Sponsor');?></h2>
+	<h2><?php  echo __('Sponsor');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="sponsors view">
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>

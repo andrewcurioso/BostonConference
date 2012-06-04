@@ -1,5 +1,13 @@
+<?php
+$this->append('header')
+?>
 <div class="news view">
-<h2><?php  echo __('News');?></h2>
+	<h2><?php  echo __('News');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="news view">
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>

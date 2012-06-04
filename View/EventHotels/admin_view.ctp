@@ -1,5 +1,13 @@
+<?php
+$this->append('header')
+?>
 <div class="eventHotels view">
-<h2><?php  echo __('Event Hotel');?></h2>
+	<h2><?php  echo __('Event Hotel');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="eventHotels view">
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>

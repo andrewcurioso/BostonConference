@@ -9,9 +9,15 @@ $this->append('sidebar');
 </div>
 <?php
 $this->end();
+$this->append('header');
 ?>
 <div class="sponsors index">
 	<h2><?php echo __('Sponsors');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="sponsors index">
 
 	<?php
 	$classes = array(

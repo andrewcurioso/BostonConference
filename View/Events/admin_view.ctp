@@ -1,5 +1,13 @@
+<?php
+$this->append('header')
+?>
 <div class="events view">
-<h2><?php  echo __('Event');?></h2>
+	<h2><?php  echo __('Event');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="events view">
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>

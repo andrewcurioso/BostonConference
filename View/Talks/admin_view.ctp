@@ -1,5 +1,13 @@
+<?php
+$this->append('header')
+?>
 <div class="talks view">
-<h2><?php  echo __('Talk');?></h2>
+	<h2><?php  echo __('Talk');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="talks view">
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>

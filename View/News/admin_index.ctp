@@ -1,5 +1,13 @@
+<?php
+$this->append('header')
+?>
 <div class="news index">
 	<h2><?php echo __('News');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="news index">
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>

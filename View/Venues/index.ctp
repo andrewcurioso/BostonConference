@@ -1,4 +1,10 @@
+<?php
+$this->append('header')
+?>
 <h2>Venue</h2>
+<?php
+$this->end();
+?>
 
 <?php
 

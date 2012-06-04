@@ -1,5 +1,5 @@
 <div class="hotels form">
-<?php echo $this->Form->create('Hotel');?>
+	<?php echo $this->Form->create('Hotel');?>
 	<fieldset>
 		<legend><?php echo __('Admin Add Hotel'); ?></legend>
 	<?php

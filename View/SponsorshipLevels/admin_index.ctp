@@ -1,5 +1,13 @@
+<?php
+$this->append('header')
+?>
 <div class="sponsorshipLevels index">
 	<h2><?php echo __('Sponsorship Levels');?></h2>
+</div>
+<?php
+$this->end();
+?>
+<div class="sponsorshipLevels index">
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id');?></th>
