@@ -28,7 +28,7 @@ function includeElements( View $view, $element, $path )
 
 if ( $elements )
 {
-	$this->start('post-content');
+	$this->start('after-content');
 	$path = isset($element_path) ? $element_path : array();
 
 	if ( !isset($is_admin_area) || !$is_admin_area )
@@ -71,7 +71,7 @@ if ( $elements )
 		<div id="contentWrapper">
 <?php
 
-$sidebar_content = $this->fetch('pre-sidebar').$this->fetch('sidebar').$this->fetch('post-sidebar');
+$sidebar_content = $this->fetch('before-sidebar').$this->fetch('sidebar').$this->fetch('after-sidebar');
 
 $content_class = '';
 
@@ -118,9 +118,11 @@ else if ( isset($skinny_sidebar) && $skinny_sidebar )
 				<div id="mainContent">
 					<?php
 						echo $this->Session->flash();
-						echo $this->fetch('pre-content');
+						echo $this->fetch('before-header');
+						echo $this->fetch('header');
+						echo $this->fetch('before-content');
 						echo $this->fetch('content');
-						echo $this->fetch('post-content');
+						echo $this->fetch('after-content');
 					?>
 				</div>
 			</div>

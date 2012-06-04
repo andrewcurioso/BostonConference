@@ -131,11 +131,13 @@ $this->end();
 
 The allowed blocks are:
 
-* pre-sidebar
+* before-sidebar
 * sidebar
-* post-sidebar
-* pre-content
-* post-content
+* after-sidebar
+* before-header
+* header
+* before-content
+* after-content
 
 ## Contributing
 You can contribute to the project by forking it on Github and submitting pull requests.
