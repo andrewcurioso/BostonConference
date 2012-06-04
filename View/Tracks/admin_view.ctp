@@ -69,15 +69,11 @@ $this->end();
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Event Id'); ?></th>
 		<th><?php echo __('Speaker Id'); ?></th>
 		<th><?php echo __('Topic'); ?></th>
-		<th><?php echo __('Abstract'); ?></th>
 		<th><?php echo __('Start Time'); ?></th>
-		<th><?php echo __('End Time'); ?></th>
+		<th><?php echo __('Duration'); ?></th>
 		<th><?php echo __('Approved'); ?></th>
-		<th><?php echo __('Track Id'); ?></th>
-		<th><?php echo __('Created'); ?></th>
 		<th><?php echo __('Modified'); ?></th>
 		<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
@@ -86,15 +82,11 @@ $this->end();
 		foreach ($track['Talk'] as $talk): ?>
 		<tr>
 			<td><?php echo $talk['id'];?></td>
-			<td><?php echo $talk['event_id'];?></td>
 			<td><?php echo $talk['speaker_id'];?></td>
 			<td><?php echo $talk['topic'];?></td>
-			<td><?php echo $talk['abstract'];?></td>
 			<td><?php echo $talk['start_time'];?></td>
-			<td><?php echo $talk['end_time'];?></td>
+			<td><?php echo $talk['duration'];?></td>
 			<td><?php echo $talk['approved'];?></td>
-			<td><?php echo $talk['track_id'];?></td>
-			<td><?php echo $talk['created'];?></td>
 			<td><?php echo $talk['modified'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'talks', 'action' => 'view', $talk['id'])); ?>

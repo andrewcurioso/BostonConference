@@ -24,7 +24,7 @@
 		);
 
 		echo $this->Form->input('event_id');
-		echo $this->Form->input('speaker_id');
+		echo $this->Form->input('speaker_id', array('empty' => true));
 		echo $this->Form->input('topic');
 		echo $this->Form->input('abstract');
 		echo $this->Form->input('start_time',$dateOptions);
