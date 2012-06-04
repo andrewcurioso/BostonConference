@@ -15,10 +15,18 @@
 
 		$durationOptions = array(
 			'options' => array(
-				15 => '15 minutes',
-				30 => '30 minutes',
-				45 => '45 minutes',
-				60 => '1 hour'
+				15  => '15 minutes',
+				30  => '30 minutes',
+				45  => '45 minutes',
+				60  => '1 hour',
+				75  => '1 hour 15 minutes',
+				90  => '1 hour 30 minutes',
+				105 => '1 hour 45 minutes',
+				120 => '2 hours',
+				135 => '2 hour 15 minutes',
+				150 => '2 hour 30 minutes',
+				165 => '2 hour 45 minutes',
+				180 => '3 hours'
 			),
 			'value' => 60
 		);
