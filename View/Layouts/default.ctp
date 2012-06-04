@@ -141,6 +141,12 @@ else if ( isset($skinny_sidebar) && $skinny_sidebar )
 
 		<?php
 			echo $this->Html->link(
+				$this->Html->image('BostonConference.boston.power.gif', array('alt'=> __('BostonConference: the open source conference framework', true), 'border' => '0')),
+				'http://www.github.com/andrewcurioso/BostonConference',
+				array('target' => '_blank', 'escape' => false)
+			);
+			echo '&nbsp;';
+			echo $this->Html->link(
 				$this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
 				'http://www.cakephp.org/',
 				array('target' => '_blank', 'escape' => false)
