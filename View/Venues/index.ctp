@@ -35,11 +35,13 @@ if ( $venue ) {
 	}
 
 	if ( count($venue['Event']['EventHotel']) > 0 ) {
+	$address = $venue['Venue']['address'];
 		echo '<h3>Accomodations</h3>';
 
 		foreach ( $venue['Event']['EventHotel'] as $hotel ) {
-			echo '<p>';
+			$address = $hotel['Hotel']['address'];
 
+			echo '<p>';
 			echo '<p><strong>'.$this->Html->clean($hotel['Hotel']['name']).'</strong>';
 
 			if ( !empty($hotel['Hotel']['website']) && preg_match('#^https?://([^/]+)#',$hotel['Hotel']['website'],$m) ) {
