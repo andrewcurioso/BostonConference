@@ -251,7 +251,7 @@ class ScheduleHelper extends AppHelper {
 				$output .= '<div class="talk '.$this->getTalkClass($talk,$colCount, $col).'"><p>'.Sanitize::HTML($talk['Talk']['topic']);
 
 				if ( !empty($talk['Speaker']['display_name']) )
-					$output .= '<span> -&nbsp;'.Sanitize::HTML($talk['Speaker']['display_name']).'</span>';
+					$output .= ' <span>-&nbsp;'.Sanitize::HTML($talk['Speaker']['display_name']).'</span>';
 
 
 				$output .= '</p></div>';
