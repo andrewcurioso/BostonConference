@@ -773,6 +773,7 @@ article time {
 .wysiwyg-toolbar {
 	padding: 0;
 	margin: 10px 0;
+	position: relative;
 }
 
 .wysiwyg-toolbar a {
@@ -782,6 +783,17 @@ article time {
 	border: 1px solid #ccc;
 }
 
-.wysiwyg-toolbar a.wysihtml5-command-active {
+.wysiwyg-toolbar a.wysihtml5-command-active, .wysiwyg-toolbar a.wysihtml5-action-active {
 	background-color: #ccc;
+}
+
+.wysiwyg-toolbar.wysihtml5-commands-disabled a {
+	visibility: hidden;
+}
+
+.wysiwyg-toolbar a.html-view {
+	visibility: visible;
+	position: absolute;
+	top: -6px;
+	right: 0px;
 }

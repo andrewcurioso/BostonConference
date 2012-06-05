@@ -40,6 +40,7 @@ class ContentManagementHelper extends AppHelper {
 <div id="$id-toobar" class="wysiwyg-toolbar">
   <a data-wysihtml5-command="bold">bold</a>
   <a data-wysihtml5-command="italic">italic</a>
+  <a data-wysihtml5-action="change_view" class="html-view">html</a>
 </div>
 EOMARKUP;
 
