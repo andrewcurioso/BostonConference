@@ -21,7 +21,7 @@ $this->end();
 	<tr>
 		<td><?php echo h($news['News']['id']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($news['User']['username'], array('controller' => 'users', 'action' => 'view', $news['User']['id'])); ?>
+			<?php echo $this->Html->link($news['User']['last_name'], array('controller' => 'users', 'action' => 'view', $news['User']['id'])); ?>
 		</td>
 		<td><?php echo h($news['News']['title']); ?>&nbsp;</td>
 		<td><?php echo h($news['News']['modified']); ?>&nbsp;</td>

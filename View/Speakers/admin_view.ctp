@@ -16,7 +16,7 @@ $this->end();
 		</dd>
 		<dt><?php echo __('User'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($speaker['User']['username'], array('controller' => 'users', 'action' => 'view', $speaker['User']['id'])); ?>
+			<?php echo $this->Html->link($speaker['User']['last_name'], array('controller' => 'users', 'action' => 'view', $speaker['User']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Approved Talk Count'); ?></dt>
