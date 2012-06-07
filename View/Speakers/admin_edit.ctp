@@ -9,8 +9,8 @@
 		echo $this->Form->input('last_name');
 		echo $this->Form->input('bio');
 		echo $this->Form->input('website');
-		echo $this->Form->input('featured');
-		echo $this->Form->input('portrait_url');
+		echo $this->Form->input('featured', array('label'=>__('Featured on Speakers page')));
+		echo $this->Form->input('portrait_url', array('after'=>__('Leave blank for a Gravatar, requires a user account.')));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
