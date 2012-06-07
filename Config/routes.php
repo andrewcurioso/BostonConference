@@ -39,7 +39,7 @@ Router::connect(
 
 // Index for plural controllers (more than one per event)
 
-$controllers = 'sponsors';
+$controllers = 'sponsors|speakers';
 
 Router::connect(
 	$prefix.'/:controller',
@@ -63,9 +63,4 @@ Router::connect(
 Router::connect(
 	$prefix.'/schedule',
 	array( 'plugin' => 'BostonConference', 'controller' => 'talks', 'action' => 'index' )
-);
-
-Router::connect(
-	$prefix.'/speakers',
-	array( 'plugin' => 'BostonConference', 'controller' => 'speakers', 'action' => 'index' )
 );

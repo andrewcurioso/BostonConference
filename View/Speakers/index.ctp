@@ -18,7 +18,7 @@ $this->end();
 					} elseif( isset( $speaker['Speaker']['user_id'] ) ) {
 						echo $this->Gravatar->image($speaker['User']['email']);
 					} else {
-						echo $this->Gravatar->image( 'someone@somewhere.com' ); // Gets a default Gravatar
+						echo $this->Gravatar->image( 'someone@example.com' ); // Gets a default Gravatar
 					}
 					?>
 				</td>
