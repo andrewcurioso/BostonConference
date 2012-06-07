@@ -17,7 +17,7 @@ class BostonConferenceAppController extends AppController {
  *
  * @var array
  */
-	public $helpers = array('BostonConference.ContentManagement');
+	public $helpers = array('BostonConference.ContentManagement', 'BostonConference.Gravatar');
 
 /**
  * components
@@ -81,4 +81,3 @@ class BostonConferenceAppController extends AppController {
 	}
 
 }
-

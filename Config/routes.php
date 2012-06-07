@@ -64,3 +64,8 @@ Router::connect(
 	$prefix.'/schedule',
 	array( 'plugin' => 'BostonConference', 'controller' => 'talks', 'action' => 'index' )
 );
+
+Router::connect(
+	$prefix.'/speakers',
+	array( 'plugin' => 'BostonConference', 'controller' => 'speakers', 'action' => 'index' )
+);

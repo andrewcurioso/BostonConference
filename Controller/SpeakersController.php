@@ -7,6 +7,15 @@ App::uses('BostonConferenceAppController', 'BostonConference.Controller');
  */
 class SpeakersController extends BostonConferenceAppController {
 
+/**
+ * index method.
+ * Displays all approved speakers.
+ *
+ * @return void
+ */
+	public function index() {
+		$this->set('speakers', $this->Speaker->find('all', array('conditions'=>array('Speaker.featured'=>'1'))));
+	}
 
 /**
  * admin_index method
