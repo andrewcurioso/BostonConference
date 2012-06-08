@@ -15,7 +15,7 @@ class Speaker extends BostonConferenceAppModel {
 	public $displayField = 'last_name';
 
 /**
- * Virtual fields 
+ * Virtual fields
  *
  * @var array
  */
@@ -62,6 +62,22 @@ class Speaker extends BostonConferenceAppModel {
 			'url' => array(
 				'rule' => array('url'),
 				'message' => 'Website must be a valid URL.',
+				'allowEmpty' => true,
+				'required' => false,
+			),
+		),
+		'email' => array(
+			'email' => array(
+				'rule' => array('email'),
+				'message' => 'Please supply a valid email address.',
+				'allowEmpty' => true,
+				'required' => false,
+			),
+		),
+		'twitter' => array(
+			'twitter' => array(
+				'rule' => '/\@[a-z0-9_]+$/i',
+				'message' => 'Please supply a valid twitter username (@username).',
 				'allowEmpty' => true,
 				'required' => false,
 			),

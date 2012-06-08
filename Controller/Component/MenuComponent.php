@@ -121,18 +121,6 @@ class MenuComponent extends Component {
 			);
 		}
 
-		// Speakers link (20)
-		$this->addLink(
-			'Speakers',
-			array(
-				'plugin' => 'BostonConference',
-				'controller' => 'speakers',
-				'action' => 'index'
-			),
-			20
-		);
-
-
 		// Schedule link (30)
 		$this->addLink(
 			'Schedule',
