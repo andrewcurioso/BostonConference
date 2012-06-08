@@ -158,7 +158,7 @@ If you would like to add additional menus, you can do so as follows.
 public function beforeFilter() {
 	// Add link to Speakers page
 	$this->Menu->addLink(
-		'Talks',
+		'Speakers',
 		array(
 			'plugin' => 'BostonConference',
 			'admin' => false,
