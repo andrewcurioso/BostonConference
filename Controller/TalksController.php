@@ -19,7 +19,7 @@ class TalksController extends BostonConferenceAppController {
  *
  * @return void
  */
-	public function index() {
+	public function schedule() {
 		$tracks = array();
 		$talks = $this->Talk->forCurrentEvent();
 
@@ -33,7 +33,7 @@ class TalksController extends BostonConferenceAppController {
 	}
 
 
-	public function listing() {
+	public function index() {
 		$talks = $this->Talk->forCurrentEvent( true, array( 'Talk.speaker_id not' => null ));
 		$this->set('talks', $talks);
 	}
