@@ -15,8 +15,8 @@ $this->end();
 				<td><?php
 					if( !empty( $speaker['Speaker']['portrait_url'] ) ) {
 						echo $this->Html->image( $speaker['Speaker']['portrait_url'] );
-					} elseif( isset( $speaker['User']['email'] ) ) {
-						echo $this->Gravatar->image($speaker['User']['email']);
+					} elseif( isset( $speaker['Speaker']['email'] ) ) {
+						echo $this->Gravatar->image($speaker['Speaker']['email']);
 					} else {
 						echo $this->Gravatar->image( 'someone@example.com' ); // Gets a default Gravatar
 					}
@@ -32,7 +32,7 @@ $this->end();
 							$talks[] = $talk['topic'];
 						}
 					?>
-					<span class='myTalks'><?php echo __('My talks:');?>&nbsp;<?php echo implode(', ', $talks); ?></span>
+					<cite><?php echo __('My talks:');?>&nbsp;<?php echo implode(', ', $talks); ?></cite>
 
 				<? endif; ?>
 				</td>
