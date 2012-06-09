@@ -108,6 +108,17 @@ class MenuComponent extends Component {
 				20
 			);
 
+		// Schedule link (30)
+		$this->addLink(
+			'Schedule',
+			array(
+				'plugin' => 'BostonConference',
+				'controller' => 'talks',
+				'action' => 'index'
+			),
+			30
+		);
+
 		} else {
 			// Home link (0 - most important)
 			$this->addLink(
@@ -119,18 +130,19 @@ class MenuComponent extends Component {
 				),
 				0
 			);
-		}
 
-		// Schedule link (30)
-		$this->addLink(
-			'Schedule',
-			array(
-				'plugin' => 'BostonConference',
-				'controller' => 'talks',
-				'action' => 'schedule'
-			),
-			30
-		);
+			// Schedule link (30)
+			$this->addLink(
+				'Schedule',
+				array(
+					'plugin' => 'BostonConference',
+					'controller' => 'talks',
+					'action' => 'schedule'
+				),
+				30
+			);
+
+		}
 
 		// Sponsors link (40)
 		$this->addLink(
