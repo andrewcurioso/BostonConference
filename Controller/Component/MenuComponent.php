@@ -32,7 +32,30 @@ class MenuComponent extends Component {
  * @returns void
  */
 	public function addLink( $label, $link, $importance=100 ) {
-		$this->_navigationLinks[] = array( $label, $link, $importance );
+		$this->_navigationLinks[md5($label)] = array( $label, $link, $importance );
+	}
+
+/**
+ *
+ * Removes links from the menu.
+ *
+ * ### Usage
+ *
+ * `$this->removeLinks( 'Schedule' );`
+ * `$this->removeLinks( array( 'Schedule', 'Venue' );`
+ *
+ * @param mixed $labels The label or array of label names
+ * @returns void
+ */
+	public function removeLinks( $labels ) {
+
+		if( !is_array( $labels ) ) {
+			$labels = array( $labels );
+		}
+
+		foreach( $labels AS $label ) { // Remove all links
+			unset( $this->_navigationLinks[md5($label)] );
+		}
 	}
 
 /**

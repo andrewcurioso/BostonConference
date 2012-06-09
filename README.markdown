@@ -189,6 +189,18 @@ You can also use this method to load any static pages in CAKE/app/View/Pages/
 	);
 ```
 
+# Removng menus
+
+You can remove any menus much in the same way you add them by using the removeLinks method.
+
+```php
+	// Remove link
+	$this->Menu->removeLinks( 'Schedule' );
+
+	// Remove multiple links
+	$this->Menu->removeLinks( array('Schedule', 'Venue') );
+```
+
 ## Contributing
 You can contribute to the project by forking it on Github and submitting pull requests.
 
