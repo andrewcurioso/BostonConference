@@ -189,7 +189,7 @@ You can also use this method to load any static pages in CAKE/app/View/Pages/
 	);
 ```
 
-# Removng menus 
+# Removing menus
 
 You can remove any menus much in the same way you add them by using the removeLinks method.
 
