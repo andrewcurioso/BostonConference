@@ -42,8 +42,8 @@ $this->end();
 			echo '</a>';
 		}
 
-	
-		$sponsorAd = '<a href="/sponsors/request" class="sponsor-box '.$class.'">Become a Sponsor</a>';
+
+		$sponsorAd = '<a href="/sponsors/request" class="sponsor-box looking '.$class.'">Become a Sponsor</a>';
 		$c = count($level['Sponsor']);
 
 		if ( $perRow && $c%$perRow != 0 ) {
@@ -61,7 +61,7 @@ $this->end();
 			echo $sponsorAd;
 
 	}
-	?>	
+	?>
 
 
 </div>
