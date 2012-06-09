@@ -156,17 +156,21 @@ If you would like to add additional menus, you can do so as follows.
 
 ```php
 public function beforeFilter() {
-	// Add link to Speakers page
-	$this->Menu->addLink(
-		'Speakers',
-		array(
-			'plugin' => 'BostonConference',
-			'admin' => false,
-			'controller' => 'speakers',
-			'action' => 'index'
-		),
-		20
-	);
+
+	if (strpos($this->action, "admin_") === false) { // Only display for non admin views
+
+		// Add link to Speakers page
+		$this->Menu->addLink(
+			'Speakers',
+			array(
+				'plugin' => 'BostonConference',
+				'admin' => false,
+				'controller' => 'speakers',
+				'action' => 'index'
+			),
+			20
+		);
+	}
 }
 ```
 You can also use this method to load any static pages in CAKE/app/View/Pages/
