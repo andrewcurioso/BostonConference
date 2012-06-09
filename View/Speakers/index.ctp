@@ -23,7 +23,7 @@ $this->end();
 					}
 					?>
 				</td>
-				<td><h3><?php echo $this->Html->clean($speaker['Speaker']['display_name']);?></h3>
+				<td><h3><?php echo $this->Html->link($speaker['Speaker']['display_name'], $speakerLink);?></h3>
 				<p class='speaker-bio'><?php echo $this->Html->clean(nl2br($speaker['Speaker']['bio']));?></p>
 
 				<? if( !empty( $speaker['Talk'] ) ) : ?>

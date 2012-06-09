@@ -740,6 +740,13 @@ div.schedule div.talk p span {
 	white-space: nowrap;
 }
 
+div.talks table tr td h3 a, div.speakers table tr td h3 a {
+	color: #2c6877;
+	font-family:'Gill Sans','lucida grande', helvetica, arial, sans-serif;
+	text-decoration: none;
+	font-weight: normal;
+}
+
 ul.tracks {
 	margin: 0;
 }

@@ -14,6 +14,7 @@ $this->end();
 			<tr>
 				<td><?php
 					$speakerLink = array( 'controller'=>'speakers','action'=>'view', $talk['Speaker']['id'] );
+					$talkLink = array( 'action'=>'view', $talk['Talk']['id'] );
 					if( !empty( $talk['Speaker']['portrait_url'] ) ) {
 						echo $this->Html->image( $talk['Speaker']['portrait_url'], array('url'=>$speakerLink) );
 					} elseif( isset( $talk['Speaker']['email'] ) ) {
@@ -23,7 +24,7 @@ $this->end();
 					}
 					?>
 				</td>
-				<td><h3><?php echo $this->Html->clean($talk['Talk']['topic']);?></h3>
+				<td><h3><?php echo $this->Html->link( $talk['Talk']['topic'], $talkLink );?></h3>
 				<address>By: <?php echo $this->Html->link($talk['Speaker']['display_name'], $speakerLink); ?></address>
 				<p class='talk-abstract'><?php echo $this->Html->clean(nl2br($talk['Talk']['abstract']));?></p>
 				</td>
