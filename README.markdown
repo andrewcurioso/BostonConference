@@ -156,17 +156,21 @@ If you would like to add additional menus, you can do so as follows.
 
 ```php
 public function beforeFilter() {
-	// Add link to Speakers page
-	$this->Menu->addLink(
-		'Speakers',
-		array(
-			'plugin' => 'BostonConference',
-			'admin' => false,
-			'controller' => 'speakers',
-			'action' => 'index'
-		),
-		20
-	);
+
+	if ( !$this->params['admin'] ) { // Do not display for admin views
+
+		// Add link to Speakers page
+		$this->Menu->addLink(
+			'Speakers',
+			array(
+				'plugin' => 'BostonConference',
+				'admin' => false,
+				'controller' => 'speakers',
+				'action' => 'index'
+			),
+			20
+		);
+	}
 }
 ```
 You can also use this method to load any static pages in CAKE/app/View/Pages/
@@ -183,6 +187,18 @@ You can also use this method to load any static pages in CAKE/app/View/Pages/
 		),
 		100
 	);
+```
+
+# Removng menus 
+
+You can remove any menus much in the same way you add them by using the removeLinks method.
+
+```php
+	// Remove link
+	$this->Menu->removeLinks( 'Schedule' );
+
+	// Remove multiple links
+	$this->Menu->removeLinks( array('Schedule', 'Venue') );
 ```
 
 ## Contributing

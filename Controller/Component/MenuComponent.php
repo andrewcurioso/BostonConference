@@ -32,7 +32,30 @@ class MenuComponent extends Component {
  * @returns void
  */
 	public function addLink( $label, $link, $importance=100 ) {
-		$this->_navigationLinks[] = array( $label, $link, $importance );
+		$this->_navigationLinks[md5($label)] = array( $label, $link, $importance );
+	}
+
+/**
+ *
+ * Removes links from the menu.
+ *
+ * ### Usage
+ *
+ * `$this->removeLinks( 'Schedule' );`
+ * `$this->removeLinks( array( 'Schedule', 'Venue' );`
+ *
+ * @param mixed $labels The label or array of label names
+ * @returns void
+ */
+	public function removeLinks( $labels ) {
+
+		if( !is_array( $labels ) ) {
+			$labels = array( $labels );
+		}
+
+		foreach( $labels AS $label ) { // Remove all links
+			unset( $this->_navigationLinks[md5($label)] );
+		}
 	}
 
 /**
@@ -108,6 +131,17 @@ class MenuComponent extends Component {
 				20
 			);
 
+		// Schedule link (30)
+		$this->addLink(
+			'Schedule',
+			array(
+				'plugin' => 'BostonConference',
+				'controller' => 'talks',
+				'action' => 'index'
+			),
+			30
+		);
+
 		} else {
 			// Home link (0 - most important)
 			$this->addLink(
@@ -119,18 +153,19 @@ class MenuComponent extends Component {
 				),
 				0
 			);
-		}
 
-		// Schedule link (30)
-		$this->addLink(
-			'Schedule',
-			array(
-				'plugin' => 'BostonConference',
-				'controller' => 'talks',
-				'action' => 'schedule'
-			),
-			30
-		);
+			// Schedule link (30)
+			$this->addLink(
+				'Schedule',
+				array(
+					'plugin' => 'BostonConference',
+					'controller' => 'talks',
+					'action' => 'schedule'
+				),
+				30
+			);
+
+		}
 
 		// Sponsors link (40)
 		$this->addLink(
