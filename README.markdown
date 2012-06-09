@@ -157,7 +157,7 @@ If you would like to add additional menus, you can do so as follows.
 ```php
 public function beforeFilter() {
 
-	if (strpos($this->action, "admin_") === false) { // Only display for non admin views
+	if ( !$this->params['admin'] ) { // Do not display for admin views
 
 		// Add link to Speakers page
 		$this->Menu->addLink(
