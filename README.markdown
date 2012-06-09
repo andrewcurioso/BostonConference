@@ -72,6 +72,15 @@ Configure::write('BostonConference.dateFormat','F j, Y');
 
 For more information on date formatting see the [PHP manual page for date](http://us2.php.net/manual/en/function.date.php).
 
+### Disable Sponsorship requests
+
+You can disable the requesting for new sponsors as follows:
+
+```php
+Configure::write('BostonConference.Sponsors', array('sponsorshipRequests'=> false ));
+```
+
+
 ## Customizing Views
 
 ### Changing The Logo, Images, or CSS
