@@ -18,6 +18,17 @@ class SpeakersController extends BostonConferenceAppController {
 	}
 
 /**
+ * view method.
+ * Displays speaker by id.
+ *
+ * @return void
+ */
+	public function view( $id ) {
+		$this->set('speakers', $this->Speaker->find('all', array('conditions'=>array('Speaker.id'=>$id))));
+		$this->render( 'index' );
+	}
+
+/**
  * admin_index method
  *
  * @return void
