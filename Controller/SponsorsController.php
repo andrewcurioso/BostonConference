@@ -8,10 +8,21 @@ App::uses('BostonConferenceAppController', 'BostonConference.Controller');
 class SponsorsController extends BostonConferenceAppController {
 
 /**
+ * Configuration field
+ *
+ * @var mixed
+ */
+	public $sponsorConfigurations;
+
+/**
  * before_filter method
  *
  */
 	public function beforeFilter() {
+
+		// Set the configuration
+		$this->sponsorConfigurations = Configure::read('BostonConference.Sponsors');
+
 		if ( property_exists($this,'Auth') )
 			$this->Auth->allow('request');
 
@@ -26,6 +37,7 @@ class SponsorsController extends BostonConferenceAppController {
  */
 	public function index() {
 		$this->set('sponsorshipLevels', $this->Sponsor->forCurrentEvent());
+		$this->set('sponsorshipRequests', $this->sponsorConfigurations['sponsorshipRequests'] );
 	}
 
 /**
@@ -35,6 +47,14 @@ class SponsorsController extends BostonConferenceAppController {
  * @return void
  */
 	public function request() {
+
+		// If sponsorshipRequests are disabled
+		if( !$this->sponsorConfigurations['sponsorshipRequests'] ) {
+			$this->Session->setFlash(__('Sorry, we are no longer accepting Sponsorship requests'));
+			$this->redirect(array('action' => 'index'));
+			exit;
+		}
+
 		if ($this->request->is('post')) {
 
 			if ( array_key_exists($this->Sponsor->alias,$this->request->data) )

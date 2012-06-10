@@ -72,6 +72,15 @@ Configure::write('BostonConference.dateFormat','F j, Y');
 
 For more information on date formatting see the [PHP manual page for date](http://us2.php.net/manual/en/function.date.php).
 
+### Disable Sponsorship requests
+
+You can disable the requesting for new sponsors as follows:
+
+```php
+Configure::write('BostonConference.Sponsors', array('sponsorshipRequests'=> false ));
+```
+
+
 ## Customizing Views
 
 ### Changing The Logo, Images, or CSS
@@ -138,6 +147,68 @@ The allowed blocks are:
 * header
 * before-content
 * after-content
+
+# Optional pages for Speakers and Talks
+There is a page for Speakers that shows a list of all the approved Speakers who have talks. There is also a page for
+Talks which shows a listing of all talks that have Speakers. You can get to these pages with the following links:
+
+* Speakers page - http://yourdomain.com/bostonconference/speakers
+* Talks page - http://yourdomain.com/bostonconference/talks
+
+# Adding your own menus
+
+If you would like to add additional menus, you can do so as follows.
+
+1. Edit your CAKE/app/Controller/AppController.php
+2. Load the component 'BostonConference.Menu'
+3. Add a beforeFilter callback method and use addLink as follows
+
+```php
+public function beforeFilter() {
+
+	if ( !$this->params['admin'] ) { // Do not display for admin views
+
+		// Add link to Speakers page
+		$this->Menu->addLink(
+			'Speakers',
+			array(
+				'plugin' => 'BostonConference',
+				'admin' => false,
+				'controller' => 'speakers',
+				'action' => 'index'
+			),
+			20
+		);
+	}
+}
+```
+You can also use this method to load any static pages in CAKE/app/View/Pages/
+
+```php
+	// Add link to my own page at CAKE/app/View/Pages/organizers.ctp
+	$this->Menu->addLink(
+		'Organizers',
+		array(
+			'plugin' => null,
+			'admin' => false,
+			'controller' => 'pages',
+			'action' => 'display'
+		),
+		100
+	);
+```
+
+# Removing menus
+
+You can remove any menus much in the same way you add them by using the removeLinks method.
+
+```php
+	// Remove link
+	$this->Menu->removeLinks( 'Schedule' );
+
+	// Remove multiple links
+	$this->Menu->removeLinks( array('Schedule', 'Venue') );
+```
 
 ## Contributing
 You can contribute to the project by forking it on Github and submitting pull requests.

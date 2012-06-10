@@ -35,11 +35,13 @@ class SpeakerTestCase extends CakeTestCase {
 			'last_name' => 'Lorem ipsum dolor sit amet',
 			'bio' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
 			'website' => '',
+			'email' => '',
+			'twitter' => '',
 			'featured' => 1,
 			'portrait_url' => ''
 		);
 
-		
+
 		// First name - Empty
 		$result = $this->Speaker->save(array_merge($validData,array('first_name' => '')));
 		$this->assertFalse($result);
@@ -65,6 +67,21 @@ class SpeakerTestCase extends CakeTestCase {
 		$this->assertFalse($result);
 		$this->assertEquals(array('website'),array_keys($this->Speaker->validationErrors));
 
+		// Email - Not an Email
+		$result = $this->Speaker->save(array_merge($validData,array('email' => 'bogus' )));
+		$this->assertFalse($result);
+		$this->assertEquals(array('email'),array_keys($this->Speaker->validationErrors));
+
+		// Twitter - Missing @
+		$result = $this->Speaker->save(array_merge($validData,array('twitter' => 'username' )));
+		$this->assertFalse($result);
+		$this->assertEquals(array('twitter'),array_keys($this->Speaker->validationErrors));
+
+		// Twitter - Has spaces
+		$result = $this->Speaker->save(array_merge($validData,array('twitter' => '@user name' )));
+		$this->assertFalse($result);
+		$this->assertEquals(array('twitter'),array_keys($this->Speaker->validationErrors));
+
 		// Portrait - Not a URL
 		$result = $this->Speaker->save(array_merge($validData,array('portrait_url' => 'bogus' )));
 		$this->assertFalse($result);
@@ -83,6 +100,16 @@ class SpeakerTestCase extends CakeTestCase {
 		// Valid save - Website
 		$this->Speaker->create();
 		$result = $this->Speaker->save(array_merge($validData,array('website' => 'http://www.example.com')));
+		$this->assertInternalType('array',$result);
+
+		// Valid save - Email
+		$this->Speaker->create();
+		$result = $this->Speaker->save(array_merge($validData,array('email' => 'someone@example.com')));
+		$this->assertInternalType('array',$result);
+
+		// Valid save - Twitter
+		$this->Speaker->create();
+		$result = $this->Speaker->save(array_merge($validData,array('twitter' => '@username')));
 		$this->assertInternalType('array',$result);
 
 		// Valid save - Portrait

@@ -86,7 +86,7 @@ else if ( isset($skinny_sidebar) && $skinny_sidebar )
 					<ul>
 					<?php
 					foreach( $navigation_links as $link )
-						echo '<li>'.$this->Html->link($link[0],$link[1]).'</li>';
+						echo '<li>'.$this->Html->link(__($link[0]),$link[1]).'</li>';
 
 					echo '<li class="auth">';
 					if ( !empty($authentication['greeting']) ) {
@@ -100,7 +100,7 @@ else if ( isset($skinny_sidebar) && $skinny_sidebar )
 					if ( !empty($authentication['logout_url']) ) {
 						echo $this->Html->link('Logout',$authentication['logout_url']);
 					}
-						
+
 
 					echo '</li>';
 					?>
