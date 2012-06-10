@@ -179,6 +179,17 @@ class MenuComponent extends Component {
 				60
 			);
 
+			// Admin hotels link (70)
+			$this->addLink(
+				'Tickets',
+				array(
+					'plugin' => 'BostonConference',
+					'controller' => 'tickets',
+					'action' => 'index'
+				),
+				70
+			);
+
 		}
 	}
 
