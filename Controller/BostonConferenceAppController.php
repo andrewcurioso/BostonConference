@@ -9,6 +9,9 @@ if ( !Configure::read('BostonConference.dateFormat') )
 if ( !Configure::read('BostonConference.Elements') )
 	Configure::write('BostonConference.Elements.News.index', array('Welcome'));
 
+if ( !Configure::read('BostonConference.Sponsors') )
+	Configure::write('BostonConference.Sponsors', array('sponsorshipRequests'=>true));
+
 
 class BostonConferenceAppController extends AppController {
 

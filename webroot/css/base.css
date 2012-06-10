@@ -570,15 +570,19 @@ a.sponsor-box {
 	font-weight: normal;
 }
 
+a.sponsor-box.looking {
+	border: 1px solid #ccc;
+}
+
 a.sponsor-box.diamond, a.sponsor-box.gold, a.sponsor-box.silver {
-	background-color: #ddd7ca;
-	border: 1px solid black;
+	background-color: #fff;
 	margin: 10px 10px 10px 0;
 	text-align: center;
 	text-decoration: none;
 }
 
 a.sponsor-box.diamond img, a.sponsor-box.gold img, a.sponsor-box.silver img {
+	vertical-align: middle;
 	border: none;
 	max-width: 100%;
 	max-height: 100%;
@@ -605,8 +609,8 @@ a.sponsor-box.silver {
 	font-size: 10px;
 }
 
-a.sponsor-box.diamond:hover,  a.sponsor-box.gold:hover, a.sponsor-box.silver:hover {
-	background-color: #faf9f7;
+a.sponsor-box.looking:hover {
+	background-color: #ccc;
 }
 
 .sponsors ul {
@@ -734,6 +738,13 @@ div.schedule div.talk p {
 div.schedule div.talk p span {
 	font-size: 0.8em;
 	white-space: nowrap;
+}
+
+div.talks table tr td h3 a, div.speakers table tr td h3 a {
+	color: #2c6877;
+	font-family:'Gill Sans','lucida grande', helvetica, arial, sans-serif;
+	text-decoration: none;
+	font-weight: normal;
 }
 
 ul.tracks {

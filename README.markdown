@@ -72,6 +72,15 @@ Configure::write('BostonConference.dateFormat','F j, Y');
 
 For more information on date formatting see the [PHP manual page for date](http://us2.php.net/manual/en/function.date.php).
 
+### Disable Sponsorship requests
+
+You can disable the requesting for new sponsors as follows:
+
+```php
+Configure::write('BostonConference.Sponsors', array('sponsorshipRequests'=> false ));
+```
+
+
 ## Customizing Views
 
 ### Changing The Logo, Images, or CSS
@@ -189,7 +198,7 @@ You can also use this method to load any static pages in CAKE/app/View/Pages/
 	);
 ```
 
-# Removng menus 
+# Removing menus
 
 You can remove any menus much in the same way you add them by using the removeLinks method.
 

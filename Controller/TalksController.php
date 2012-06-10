@@ -39,6 +39,19 @@ class TalksController extends BostonConferenceAppController {
 	}
 
 /**
+ * view method.
+ * Displays talk by id.
+ *
+ * @return void
+ */
+	public function view( $id ) {
+		$talk = $this->Talk->forCurrentEvent( true, array( 'Talk.id' => $id ));
+		$this->set('talks', $talk);
+		$this->render('index');
+	}
+
+
+/**
  * admin_index method
  *
  * @return void
