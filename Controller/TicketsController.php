@@ -20,7 +20,7 @@ class TicketsController extends BostonConferenceAppController {
  * @return void
  */
 	public function beforeFilter() {
-		$this->Auth->allow(array('buy'));
+		$this->Auth->allow(array('checkout'));
 
 		return parent::beforeFilter();
 	}
@@ -58,6 +58,11 @@ class TicketsController extends BostonConferenceAppController {
  * @return void
  */
 	public function checkout() {
+		if ( !$this->Auth->loggedIn() ) {
+			$this->Session->setFlash(__('Please login before buying tickets'));
+			$this->redirect($this->Auth->loginAction);
+		}
+
 		$ticket = $this->Session->read('Ticket');
 		if ( !$ticket || !array_key_exists('quantity',$ticket) || !is_array($ticket['quantity']) ) {
 			$this->Session->delete('Ticket');
