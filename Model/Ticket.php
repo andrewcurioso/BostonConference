@@ -69,4 +69,29 @@ class Ticket extends BostonConferenceAppModel {
 			'counterCache' => true,
 		)
 	);
+
+/**
+ * Validates a badge name and calls invalidate if appropriate.
+ *
+ * @param string $key The data key for the badge name.
+ * @param string $value The value of the badge name.
+ * @return boolean True if the badge name validates.
+ */
+	public function validateBadgeName($key,$value) {
+		foreach ( $this->validate['badge_name'] as $rule ) {
+
+			$params = $rule['rule'];
+			$ruleName = array_shift($params);
+			array_unshift($params,$value);
+
+			$result = call_user_func_array(array('Validation', $ruleName), $params);
+
+			if ( !$result ) {
+				$this->invalidate($key,$rule['message']);
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

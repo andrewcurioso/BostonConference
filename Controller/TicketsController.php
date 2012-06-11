@@ -7,6 +7,162 @@ App::uses('BostonConferenceAppController', 'BostonConference.Controller');
  */
 class TicketsController extends BostonConferenceAppController {
 
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Session','BostonConference.Payments');
+
+/** 
+ * Before filter
+ * 
+ * @return void
+ */
+	public function beforeFilter() {
+		$this->Auth->allow(array('buy'));
+
+		return parent::beforeFilter();
+	}
+
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function index() {
+		if ($this->request->is('post')) {
+			$countIsValid = false;
+
+			foreach( $this->data['quantity'] as $quantity ) {
+				if ( $quantity > 0 ) {
+					$countIsValid = true;
+					break;
+				}
+			}
+
+			if ( $countIsValid ) {
+				$this->Session->write('Ticket',$this->data);
+				$this->redirect(array('action' => 'checkout'));
+			} else {
+				$this->Session->setFlash(__('Please select a valid quantity of tickets before continuing'));
+			}
+		}
+
+		$this->set('ticketOptions', $this->Ticket->TicketOption->find('all',array('order'=>array('label'))));
+	}
+
+/**
+ * checkout method
+ *
+ * @return void
+ */
+	public function checkout() {
+		$ticket = $this->Session->read('Ticket');
+		if ( !$ticket || !array_key_exists('quantity',$ticket) || !is_array($ticket['quantity']) ) {
+			$this->Session->delete('Ticket');
+			$this->redirect(array('action' => 'index'));
+		}
+
+		$options = $this->Ticket->TicketOption->find(
+				'all',
+				array(
+					'order'=>array('label'),
+					'conditions' => array( 'id' => array_keys($ticket['quantity']) )
+				)
+			);
+
+		if ( count($options) != count($ticket['quantity']) ) {
+			$this->Session->delete('Ticket');
+			$this->Session->setFlash(__('An error occured processing your tickets'));
+			$this->redirect(array('action' => 'index'));
+		}
+
+		$totalPrice = 0;
+
+		foreach ( $options as $i => $option ) {
+			foreach ( $ticket['quantity'] as $id => $quantity ) {
+				if ( $option['TicketOption']['id'] == $id ) {
+					$options[$i]['TicketOption']['quantity'] = $quantity;
+					$totalPrice += $quantity * $option['TicketOption']['price'];
+					break;
+				}
+			}
+		}
+
+		if ($this->request->is('post')) {
+
+			$valid = true;
+			$ticket['badge_name'] = array();
+
+			$ticket['organization'] = $this->data['Ticket']['organization'];
+
+			foreach( $this->data['Ticket'] as $key => $value ) {
+				if ( preg_match('/badge_name_([0-9]+)_([0-9]+)/',$key,$m) == 1 ) {
+
+					$valid = $valid && $this->Ticket->validateBadgeName($key,$value);
+
+					if ( !array_key_exists($m[1],$ticket['badge_name']) )
+						$ticket['badge_name'][$m[1]] = array($value);
+					else
+						$ticket['badge_name'][$m[1]][] = $value;
+				}
+			}
+
+			if ( $valid ) {
+				$this->Session->write('Ticket',$ticket);
+
+				if ( $totalPrice > 0 ) {
+					if ( !$this->Payments->process($totalPrice) ) {
+						$this->Session->setFlash(__('There was an error processing your tickets'));
+						//$this->redirect(array('action' => 'index'));
+						return;
+					}
+				}
+
+				if ( $this->_completeRegistration() ) {
+					$this->Session->setFlash(__('Thank you'));
+				} else {
+					$this->Session->setFlash(__('There was an error processing your tickets'));
+				}
+				$this->redirect(array('action' => 'index'));
+			}
+		}
+
+		$this->set('ticketOptions',$options);
+		$this->set('totalPrice',$totalPrice);
+	}
+
+/**
+ * confirm method
+ *
+ * @return void
+ */
+	public function confirm() {
+		if ( $this->_completeRegistration(array($this->Payments,'confirm')) ) {
+			$this->Session->setFlash(__('Thank you'));
+		} else {
+			$this->Session->setFlash(__('There was an error processing your tickets'));
+		}
+
+		$this->Session->delete('PayPal');
+		$this->Session->delete('Ticket');
+
+		$this->redirect(array('action' => 'index'));
+	}
+
+/**
+ * cancel method
+ *
+ * @return void
+ */
+	public function cancel() {
+		$this->Session->delete('PayPal');
+		$this->Session->delete('Ticket');
+
+		$this->Session->setFlash(__('Your ticket purchase has been canceled'));
+		$this->redirect(array('action' => 'index'));
+	}
 
 /**
  * admin_index method
@@ -98,5 +254,67 @@ class TicketsController extends BostonConferenceAppController {
 		}
 		$this->Session->setFlash(__('Ticket was not deleted'));
 		$this->redirect(array('action' => 'index'));
+	}
+
+/**
+ * Completes registration.
+ *
+ * @return void 
+ */
+	protected function _completeRegistration( $callback = null ) {
+
+		if ( !($userId = $this->Auth->user('id')) )
+			return false;
+
+		$ticket = $this->Session->read('Ticket');
+		if ( !$ticket || !array_key_exists('quantity',$ticket) || !is_array($ticket['quantity']) ) {
+			$this->Session->delete('Ticket');
+			$this->redirect(array('action' => 'index'));
+		}
+
+		$options = $this->Ticket->TicketOption->find(
+				'all',
+				array(
+					'order'=>array('label'),
+					'conditions' => array( 'id' => array_keys($ticket['quantity']) )
+				)
+			);
+
+		if ( count($options) != count($ticket['quantity']) ) {
+			$this->Session->delete('Ticket');
+			$this->Session->setFlash(__('An error occured processing your tickets'));
+			$this->redirect(array('action' => 'index'));
+		}
+
+		$organization = $ticket['organization'];
+
+		$this->Ticket->begin();
+
+		foreach ( $ticket['badge_name'] as $option => $names ) {
+
+			foreach( $names as $name ) {
+				$this->Ticket->create();
+				$result = $this->Ticket->save(array(
+					'ticket_option_id' => $option,
+					'badge_name' => $name,
+					'organization' => $organization,
+					'user_id' => $userId,
+					'paid' => 1
+				));
+
+				if ( !$result ) {
+					$this->Ticket->rollback();
+					return false;
+				}
+			}
+		}
+
+		if ( $callback && !call_user_func($callback) ) {
+			$this->Ticket->rollback();
+			return false;
+		}
+
+		$this->Ticket->commit();
+		return true;
 	}
 }
