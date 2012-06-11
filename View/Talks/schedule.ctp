@@ -44,6 +44,6 @@ if ( count( $talks ) == 0 )
 }
 else
 {
-	echo $this->Schedule->calandar($talks);
+	echo $this->Schedule->calandar($talks, !empty($this->request->params['admin']));
 }
 ?>

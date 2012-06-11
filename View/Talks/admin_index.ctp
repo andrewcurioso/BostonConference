@@ -62,6 +62,7 @@ $this->append('sidebar');
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
+		<li><?php echo $this->Html->link(__('Show Schedule'), array('action' => 'schedule')); ?></li>
 		<li><?php echo $this->Html->link(__('New Talk'), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('Add Multiple Talks'), array('action' => 'add_multiple')); ?></li>
 		<li><?php echo $this->Html->link(__('List Speakers'), array('controller' => 'speakers', 'action' => 'index')); ?> </li>

@@ -9,6 +9,14 @@ App::uses('Sanitize', 'Utility');
 class ScheduleHelper extends AppHelper {
 
 /**
+ * Array of helpers needed
+ *
+ * @var array
+ */
+	public $helpers = array('Html');
+
+
+/**
  * Time format (as used in `date`)
  *
  * @var string
@@ -83,7 +91,7 @@ class ScheduleHelper extends AppHelper {
 
 		return $class;
 	}
-	
+
 /**
  * Gets all the talks in a particular time block.
  * Important: This function assumes the talks are sorted by start time.
@@ -121,14 +129,15 @@ class ScheduleHelper extends AppHelper {
  * Important: This function assumes the talks are sorted by start time.
  *
  * @param array $talks An array of all talks sortedby start time.
+ * @param bool $edit If true, creates a link to edit talks. Default is false.
  * @return string The HTML for the calandar.
  */
-	public function calandar( $talks )
+	public function calandar( $talks, $edit=false )
 	{
 		$c = count($talks);
 
 		$output = '';
-	
+
 		$output .= '<div class="schedule">';
 
 		// Stores the current day for day headers
@@ -174,7 +183,7 @@ class ScheduleHelper extends AppHelper {
 
 			// Fill in "empty" time blocks if appropriate
 			if ( $previousBlock != 0 ) {
-				$emptyBlocks = 1;	
+				$emptyBlocks = 1;
 
 				for ( $b = $previousBlock + 30*60; $b < $block; $b += 30*60 ) {
 					$output .= '<div class="block">';
@@ -248,7 +257,10 @@ class ScheduleHelper extends AppHelper {
 				if ( $blockMap[$col] > 0 )
 					$col++;
 
-				$output .= '<div class="talk '.$this->getTalkClass($talk,$colCount, $col).'"><p>'.Sanitize::HTML($talk['Talk']['topic']);
+				$topicTitle = Sanitize::HTML($talk['Talk']['topic']);
+				if( $edit == true )
+					$topicTitle = $this->Html->link( $topicTitle, array('action'=>'edit', 'admin'=>true, $talk['Talk']['id'] ) );
+				$output .= '<div class="talk '.$this->getTalkClass($talk,$colCount, $col).'"><p>'.$topicTitle;
 
 				if ( !empty($talk['Speaker']['display_name']) )
 					$output .= ' <span>-&nbsp;'.Sanitize::HTML($talk['Speaker']['display_name']).'</span>';
