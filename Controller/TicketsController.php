@@ -125,8 +125,7 @@ class TicketsController extends BostonConferenceAppController {
 				if ( $totalPrice > 0 ) {
 					if ( !$this->Payments->process($totalPrice) ) {
 						$this->Session->setFlash(__('There was an error processing your tickets'));
-						//$this->redirect(array('action' => 'index'));
-						return;
+						$this->redirect(array('action' => 'index'));
 					}
 				}
 
