@@ -50,6 +50,11 @@ class TicketsController extends BostonConferenceAppController {
 		}
 
 		$this->set('ticketOptions', $this->Ticket->TicketOption->find('all',array('order'=>array('label'))));
+
+		$this->set('tickets', $this->Ticket->find('all',array(
+			'order'=>array('Ticket.badge_name','Ticket.id'),
+			'conditions'=>array('user_id' => $this->Auth->user('id'))
+		)));
 	}
 
 /**

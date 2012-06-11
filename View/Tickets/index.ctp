@@ -1,5 +1,32 @@
 <?php
 
+if ( count( $tickets ) > 0 )
+{
+?>
+
+	<h2>My Tickets</h2>
+
+	<table cellpadding="0" cellspacing="0">
+	<tr>
+		<th><?php echo __('Package'); ?></th>
+		<th><?php echo __('Badge Name');?></th>
+		<th><?php echo __('Organization');?></th>
+	</tr>
+<?php
+
+	foreach( $tickets as $ticket ) {
+
+		echo '<tr>';
+		echo '<td>'.h($ticket['TicketOption']['label']).'</td>';
+		echo '<td>'.h($ticket['Ticket']['badge_name']).'</td>';
+		echo '<td>'.h($ticket['Ticket']['organization']).'</td>';
+		echo '</tr>';
+	}
+?>
+	</table>
+<?php
+}
+
 if ( count( $ticketOptions ) > 0 )
 {
 
@@ -8,11 +35,13 @@ if ( count( $ticketOptions ) > 0 )
 	$availableToBuy = false;
 ?>
 
+	<h2>Buy Tickets</h2>
+
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo __('Package'); ?></th>
-			<th><?php echo __('Price');?></th>
-			<th><?php echo __('Quality');?></th>
+		<th><?php echo __('Package'); ?></th>
+		<th><?php echo __('Price');?></th>
+		<th><?php echo __('Quality');?></th>
 	</tr>
 	<?php
 	foreach ($ticketOptions as $ticketOption): ?>
