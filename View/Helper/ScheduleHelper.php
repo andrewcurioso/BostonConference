@@ -259,7 +259,7 @@ class ScheduleHelper extends AppHelper {
 
 				$topicTitle = Sanitize::HTML($talk['Talk']['topic']);
 				if( $edit == true )
-					$topicTitle = $this->Html->link( $topicTitle, array('action'=>'edit', 'admin'=>true, $talk['Talk']['id'] ) );
+					$topicTitle = $this->Html->link( $topicTitle, array('action'=>'edit', 'admin'=>true, $talk['Talk']['id'] ), array('escape'=>false) );
 				$output .= '<div class="talk '.$this->getTalkClass($talk,$colCount, $col).'"><p>'.$topicTitle;
 
 				if ( !empty($talk['Speaker']['display_name']) )
