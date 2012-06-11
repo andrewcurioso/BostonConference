@@ -32,6 +32,9 @@ class TalksController extends BostonConferenceAppController {
 		$this->set('talks', $talks);
 	}
 
+	public function admin_schedule() {
+		$this->setAction('schedule');
+	}
 
 	public function index() {
 		$talks = $this->Talk->forCurrentEvent( true, array( 'Talk.speaker_id not' => null ));
