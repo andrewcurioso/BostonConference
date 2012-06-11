@@ -31,7 +31,7 @@ if ( count( $ticketOptions ) > 0 )
 {
 
 	echo $this->Form->create('Ticket');
-	
+
 	$availableToBuy = false;
 ?>
 
@@ -70,7 +70,7 @@ if ( count( $ticketOptions ) > 0 )
 
 					$options = array();
 
-					for ( $i=0; $i < $canBuy && $i <= 10; $i++ )
+					for ( $i=0; $i <= $canBuy && $i <= 10; $i++ )
 						$options[] = number_format($i,0);
 
 					echo $this->Form->select('quantity.'.$ticketOption['TicketOption']['id'],$options,array('empty'=>false));
