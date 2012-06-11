@@ -96,18 +96,18 @@ class MenuComponent extends Component {
 	protected function _initDefaultMenu(Controller $controller) {
 		$isAdmin = $controller->params['admin'];
 
-		if ( $isAdmin ) {
+		// Home link (0 - most important)
+		$this->addLink(
+			'Home',
+			array(
+				'plugin' => 'BostonConference',
+				'controller' => ( $isAdmin ? 'boston_conference' : 'news' ),
+				'action' => 'index'
+			),
+			0
+		);
 
-			// Home link (0 - most important)
-			$this->addLink(
-				'Home',
-				array(
-					'plugin' => 'BostonConference',
-					'controller' => 'boston_conference',
-					'action' => 'index'
-				),
-				0
-			);
+		if ( $isAdmin ) {
 
 			// Events admin link (10)
 			$this->addLink(
@@ -130,6 +130,7 @@ class MenuComponent extends Component {
 				),
 				20
 			);
+		}
 
 		// Schedule link (30)
 		$this->addLink(
@@ -137,37 +138,23 @@ class MenuComponent extends Component {
 			array(
 				'plugin' => 'BostonConference',
 				'controller' => 'talks',
-				'action' => 'index'
+				'action' => 'schedule'
 			),
 			30
 		);
 
-		} else {
-			// Home link (0 - most important)
-			$this->addLink(
-				'Home',
-				array(
-					'plugin' => 'BostonConference',
-					'controller' => 'news',
-					'action' => 'index'
-				),
-				0
-			);
+		// Admin tickets link (40)
+		$this->addLink(
+			'Tickets',
+			array(
+				'plugin' => 'BostonConference',
+				'controller' => 'tickets',
+				'action' => 'index'
+			),
+			40
+		);
 
-			// Schedule link (30)
-			$this->addLink(
-				'Schedule',
-				array(
-					'plugin' => 'BostonConference',
-					'controller' => 'talks',
-					'action' => 'schedule'
-				),
-				30
-			);
-
-		}
-
-		// Sponsors link (40)
+		// Sponsors link (50)
 		$this->addLink(
 			'Sponsors',
 			array(
@@ -175,10 +162,10 @@ class MenuComponent extends Component {
 				'controller' => 'sponsors',
 				'action' => 'index'
 			),
-			40
+			50
 		);
 
-		// Vanue link (50)
+		// Vanue link (60)
 		$this->addLink(
 			'Venue'.($isAdmin ? 's' : ''),
 			array(
@@ -186,12 +173,12 @@ class MenuComponent extends Component {
 				'controller' => 'venues',
 				'action' => 'index'
 			),
-			50
+			60
 		);
 
 		if ( $isAdmin ) {
 
-			// Admin hotels link (60)
+			// Admin hotels link (70)
 			$this->addLink(
 				'Hotels',
 				array(
@@ -199,21 +186,9 @@ class MenuComponent extends Component {
 					'controller' => 'hotels',
 					'action' => 'index'
 				),
-				60
-			);
-
-			// Admin hotels link (70)
-			$this->addLink(
-				'Tickets',
-				array(
-					'plugin' => 'BostonConference',
-					'controller' => 'tickets',
-					'action' => 'index'
-				),
 				70
 			);
 
 		}
 	}
-
 }
