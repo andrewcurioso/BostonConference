@@ -50,6 +50,63 @@ class TalksController extends BostonConferenceAppController {
 		$this->render('index');
 	}
 
+/**
+ * admin_add_multiple method
+ *
+ * @return void
+ */
+	public function admin_add_multiple() {
+
+		if ($this->request->is('post')) {
+
+			$this->Talk->set($this->request->data);
+			if ($this->Talk->validates( )) {
+
+				$originalData = $this->request->data;
+				$start = strtotime($this->Talk->deconstruct('start_time', $this->request->data['Talk']['start_of_day']));
+				$end = strtotime("-{$this->request->data['Talk']['duration']} minutes",
+								 strtotime($this->Talk->deconstruct('start_time', array_merge(
+														  $this->request->data['Talk']['start_of_day'],
+														  $this->request->data['Talk']['end_of_day']
+														  ))));
+				$interval = $this->request->data['Talk']['interval'];
+				$counter = 0;
+				$data = array();
+
+				while( $start <= $end ) {
+					$counter++;
+
+					// Set new start time
+					$this->Talk->set( 'start_time', date('Y-m-d H:i', $start));
+
+					// Append index to topic name
+					$this->Talk->set( 'topic', "{$this->request->data['Talk']['topic']} : {$counter}");
+
+					// Store
+					$data[] = $this->Talk->data;
+
+					// Next start time
+					$start = strtotime( "+{$interval} minutes", $start );
+				}
+
+				// saveMany
+				if( $counter && $this->Talk->saveMany( $data ) ) {
+					$this->Session->setFlash(__("{$counter} talks have been created"));
+					$this->redirect(array('action' => 'index'));
+				} else {
+					$this->Session->setFlash(__('The talks could not be created. Please, try again.'));
+				}
+			} else {
+				$this->Session->setFlash(__('The talks could not be created. Please, try again.'));
+			}
+		}
+
+		$events = $this->Talk->Event->find('list');
+		$speakers = $this->Talk->Speaker->find('list');
+		$tracks = $this->Talk->Track->find('list');
+		$this->set(compact('events', 'speakers', 'tracks'));
+	}
+
 
 /**
  * admin_index method
