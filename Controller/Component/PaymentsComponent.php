@@ -20,8 +20,8 @@ class PaymentsComponent extends Component {
  * @var array
  */
 	protected $_paypalSettings = array(
-		'endpoint' => 'https://api-3t.sandbox.paypal.com/nvp',
-		'frontend' => 'https://www.sandbox.paypal.com/webscr',
+		'endpoint' => 'https://api-3t.paypal.com/nvp',
+		'frontend' => 'https://www.paypal.com/webscr',
 		'version'  => 64,
 		'username' => '',
 		'password' => '',
@@ -78,19 +78,19 @@ class PaymentsComponent extends Component {
  */
 	protected function _processPaypal($amount) {
 
-		$nvpstr  = "&PAYMENTREQUEST_0_AMT=". $amount;
-		$nvpstr .= "&PAYMENTREQUEST_0_PAYMENTACTION=Sale";
-		$nvpstr .= "&RETURNURL=" . Router::url(array('controller'=>'tickets','action'=>'confirm'),true);
-		$nvpstr .= "&CANCELURL=" . Router::url(array('controller'=>'tickets','action'=>'cancel'),true);
-		$nvpstr .= "&PAYMENTREQUEST_0_CURRENCYCODE=".$this->_paypalSettings['currency'];
+		$nvpstr  = '&PAYMENTREQUEST_0_AMT='. $amount;
+		$nvpstr .= '&PAYMENTREQUEST_0_PAYMENTACTION=Sale';
+		$nvpstr .= '&RETURNURL=' . Router::url(array('controller'=>'tickets','action'=>'confirm'),true);
+		$nvpstr .= '&CANCELURL=' . Router::url(array('controller'=>'tickets','action'=>'cancel'),true);
+		$nvpstr .= '&PAYMENTREQUEST_0_CURRENCYCODE='.$this->_paypalSettings['currency'];
 		$nvpstr .= '&NOSHIPPING=1';
 		
-		$resArray = $this->_callPaypalAPI("SetExpressCheckout", $nvpstr);
-		$ack = strtoupper($resArray["ACK"]);
+		$resArray = $this->_callPaypalAPI('SetExpressCheckout', $nvpstr);
+		$ack = strtoupper($resArray['ACK']);
 
-		if($ack=="SUCCESS" || $ack=="SUCCESSWITHWARNING")
+		if($ack=='SUCCESS' || $ack=='SUCCESSWITHWARNING')
 		{
-			$token = urldecode($resArray["TOKEN"]);
+			$token = urldecode($resArray['TOKEN']);
 			$this->Session->write('PayPal.Token',$token);
 
 			$this->_Controller->redirect($this->_paypalSettings['frontend'].'?cmd=_express-checkout&token='.$token);
@@ -110,12 +110,12 @@ class PaymentsComponent extends Component {
 		if ( !$token )
 			return false;
 
-		$nvpstr = "&TOKEN=".$token;
+		$nvpstr = '&TOKEN='.$token;
 		
-		$resArray = $this->_callPaypalAPI("GetExpressCheckoutDetails", $nvpstr);
-		$ack = strtoupper($resArray["ACK"]);
+		$resArray = $this->_callPaypalAPI('GetExpressCheckoutDetails', $nvpstr);
+		$ack = strtoupper($resArray['ACK']);
 
-		if($ack=="SUCCESS" || $ack=="SUCCESSWITHWARNING")
+		if($ack=='SUCCESS' || $ack=='SUCCESSWITHWARNING')
 		{
 			$payerId = $resArray['PAYERID'];
 			$amount = $resArray['AMT'];
@@ -131,10 +131,10 @@ class PaymentsComponent extends Component {
 			$nvpstr .= '&PAYMENTREQUEST_0_CURRENCYCODE='.$this->_paypalSettings['currency'];
 			$nvpstr .= '&PAYMENTREQUEST_0_PAYMENTACTION=Sale';
 
-			$resArray = $this->_callPaypalAPI("DoExpressCheckoutPayment", $nvpstr);
-			$ack = strtoupper($resArray["ACK"]);
+			$resArray = $this->_callPaypalAPI('DoExpressCheckoutPayment', $nvpstr);
+			$ack = strtoupper($resArray['ACK']);
 
-			if ( $ack=="SUCCESS" || $ack=="SUCCESSWITHWARNING" ) {
+			if ( $ack=='SUCCESS' || $ack=='SUCCESSWITHWARNING' ) {
 				$this->Session->write(
 					'Ticket.TransactionData.id',
 					$resArray['PAYMENTINFO_0_TRANSACTIONID']
@@ -169,7 +169,7 @@ class PaymentsComponent extends Component {
 		curl_setopt($ch, CURLOPT_POST, 1);
 		
 		//NVPRequest for submitting to server
-		$nvpreq="METHOD=" . urlencode($methodName) . "&VERSION=" . urlencode($this->_paypalSettings['version']) . "&PWD=" . urlencode($this->_paypalSettings['password']) . "&USER=" . urlencode($this->_paypalSettings['username']) . "&SIGNATURE=" . urlencode($this->_paypalSettings['signature']) . $nvpStr . "&BUTTONSOURCE=";
+		$nvpreq='METHOD=' . urlencode($methodName) . '&VERSION=' . urlencode($this->_paypalSettings['version']) . '&PWD=' . urlencode($this->_paypalSettings['password']) . '&USER=' . urlencode($this->_paypalSettings['username']) . '&SIGNATURE=' . urlencode($this->_paypalSettings['signature']) . $nvpStr . '&BUTTONSOURCE=';
 
 		//setting the nvpreq as POST FIELD to curl
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $nvpreq);
