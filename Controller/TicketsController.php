@@ -297,54 +297,13 @@ class TicketsController extends BostonConferenceAppController {
 			return false;
 
 		$ticket = $this->Session->read('Ticket');
-		if ( !$ticket || !array_key_exists('quantity',$ticket) || !is_array($ticket['quantity']) ) {
+
+		if ( !$this->Ticket->completeRegistration($userId, $ticket, $callback) ) {
 			$this->Session->delete('Ticket');
+			$this->Session->setFlash(__('There was an error processing your tickets'));
 			$this->redirect(array('action' => 'index'));
-		}
-
-		$options = $this->Ticket->TicketOption->find(
-				'all',
-				array(
-					'order'=>array('label'),
-					'conditions' => array( 'id' => array_keys($ticket['quantity']) )
-				)
-			);
-
-		if ( count($options) != count($ticket['quantity']) ) {
-			$this->Session->delete('Ticket');
-			$this->Session->setFlash(__('An error occured processing your tickets'));
-			$this->redirect(array('action' => 'index'));
-		}
-
-		$organization = $ticket['organization'];
-
-		$this->Ticket->begin();
-
-		foreach ( $ticket['badge_name'] as $option => $names ) {
-
-			foreach( $names as $name ) {
-				$this->Ticket->create();
-				$result = $this->Ticket->save(array(
-					'ticket_option_id' => $option,
-					'badge_name' => $name,
-					'organization' => $organization,
-					'user_id' => $userId,
-					'paid' => 1
-				));
-
-				if ( !$result ) {
-					$this->Ticket->rollback();
-					return false;
-				}
-			}
-		}
-
-		if ( $callback && !call_user_func($callback) ) {
-			$this->Ticket->rollback();
 			return false;
 		}
-
-		$this->Ticket->commit();
 		return true;
 	}
 }
