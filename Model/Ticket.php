@@ -123,6 +123,7 @@ class Ticket extends BostonConferenceAppModel {
 
 		$organization = $data['organization'];
 
+		$this->query('LOCK TABLE ticket_options WRITE');
 		$this->begin();
 
 		foreach ( $data['badge_name'] as $option => $names ) {
@@ -139,6 +140,7 @@ class Ticket extends BostonConferenceAppModel {
 
 				if ( !$result ) {
 					$this->rollback();
+					$this->query('UNLOCK TABLES');
 					return false;
 				}
 			}
@@ -146,10 +148,12 @@ class Ticket extends BostonConferenceAppModel {
 
 		if ( $callback && !call_user_func($callback) ) {
 			$this->rollback();
+			$this->query('UNLOCK TABLES');
 			return false;
 		}
 
 		$this->commit();
+		$this->query('UNLOCK TABLES');
 		return true;
 	}
 }
