@@ -14,6 +14,17 @@ class TalksController extends BostonConferenceAppController {
  */
 	public $helpers = array('BostonConference.Schedule');
 
+/** 
+ * Before filter
+ * 
+ * @return void
+ */
+	public function beforeFilter() {
+		$this->Auth->allow(array('schedule'));
+
+		return parent::beforeFilter();
+	}
+
 /**
  * index method
  *
@@ -32,10 +43,20 @@ class TalksController extends BostonConferenceAppController {
 		$this->set('talks', $talks);
 	}
 
+/**
+ * admin_schedule method
+ *
+ * @returns void
+ */
 	public function admin_schedule() {
 		$this->setAction('schedule');
 	}
 
+/**
+ * index method
+ *
+ * @returns void
+ */
 	public function index() {
 		$talks = $this->Talk->forCurrentEvent( true, array( 'Talk.speaker_id not' => null ));
 		$this->set('talks', $talks);

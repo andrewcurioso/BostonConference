@@ -84,6 +84,9 @@ class Talk extends BostonConferenceAppModel {
 			'foreignKey' => 'speaker_id',
 			'order' => 'last_name',
 			'dependant' => false,
+			'counterCache' => array(
+				'approved_talk_count' => array('Talk.approved' => 1)
+			)
 		),
 		'Track' => array(
 			'className' => 'BostonConference.Track',
