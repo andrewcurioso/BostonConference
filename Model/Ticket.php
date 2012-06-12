@@ -94,4 +94,62 @@ class Ticket extends BostonConferenceAppModel {
 
 		return true;
 	}
+
+/**
+ * Completes registration.
+ *
+ * @param string $userId The user id the tickets belong to.
+ * @param array $data The ticket data to save.
+ * @param Callback $callback An optional callback to confirm that the save should happen.
+ * @return void 
+ */
+	public function completeRegistration( $userId, $data, $callback = null ) {
+
+		if ( !$data || !array_key_exists('quantity',$data) || !is_array($data['quantity']) ) {
+			return false;
+		}
+
+		$options = $this->TicketOption->find(
+				'all',
+				array(
+					'order'=>array('label'),
+					'conditions' => array( 'id' => array_keys($data['quantity']) )
+				)
+			);
+
+		if ( count($options) != count($data['quantity']) ) {
+			return false;
+		}
+
+		$organization = $data['organization'];
+
+		$this->begin();
+
+		foreach ( $data['badge_name'] as $option => $names ) {
+
+			foreach( $names as $name ) {
+				$this->create();
+				$result = $this->save(array(
+					'ticket_option_id' => $option,
+					'badge_name' => $name,
+					'organization' => $organization,
+					'user_id' => $userId,
+					'paid' => 1
+				));
+
+				if ( !$result ) {
+					$this->rollback();
+					return false;
+				}
+			}
+		}
+
+		if ( $callback && !call_user_func($callback) ) {
+			$this->rollback();
+			return false;
+		}
+
+		$this->commit();
+		return true;
+	}
 }
