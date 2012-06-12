@@ -39,36 +39,11 @@ class BostonConferenceAppController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 
-		$this->_populateAuthData();
-
 		$this->set('is_admin_area',$this->params['admin']);
 
 		if ( $this->params['admin'] ) {
 			$this->set('skinny_sidebar',true);
 		}
-	}
-
-/**
- * Populates authentication related values for the view.
- *
- * @returns void
- */
-	protected function _populateAuthData() {
-
-		if ( !property_exists($this,'Auth') )
-			return;
-
-		$a = array();
-
-		if ( $this->Auth->loggedIn() ) {
-			$a['logout_url'] = array( 'plugin' => 'BostonConference', 'controller' => 'boston_conference', 'action' => 'logout', 'admin' => false );
-			$a['greeting'] = Configure::read('BostonConference.greeting');
-		} else {
-			$a['login_url'] = $this->Auth->loginAction;
-		}
-
-
-		$this->set('authentication',$a);
 	}
 
 /**

@@ -72,6 +72,8 @@ class MenuComponent extends Component {
 
 		$controller->set('navigation_links',$this->_navigationLinks);
 
+		$this->_populateAuthData($controller);
+
 		parent::beforeRender($controller);
 	}
 
@@ -190,5 +192,28 @@ class MenuComponent extends Component {
 			);
 
 		}
+	}
+
+/**
+ * Populates authentication related values for the view.
+ *
+ * @returns void
+ */
+	protected function _populateAuthData($controller) {
+
+		if ( !property_exists($controller,'Auth') )
+			return;
+
+		$a = array();
+
+		if ( $controller->Auth->loggedIn() ) {
+			$a['logout_url'] = array( 'plugin' => 'BostonConference', 'controller' => 'boston_conference', 'action' => 'logout', 'admin' => false );
+			$a['greeting'] = Configure::read('BostonConference.greeting');
+		} else {
+			$a['login_url'] = $controller->Auth->loginAction;
+		}
+
+
+		$controller->set('authentication',$a);
 	}
 }
