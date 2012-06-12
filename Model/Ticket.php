@@ -109,6 +109,8 @@ class Ticket extends BostonConferenceAppModel {
 			return false;
 		}
 
+		$this->query('LOCK TABLES ticket_options as TicketOption WRITE, tickets as Ticket WRITE');
+
 		$options = $this->TicketOption->find(
 				'all',
 				array(
@@ -121,9 +123,22 @@ class Ticket extends BostonConferenceAppModel {
 			return false;
 		}
 
+		foreach( $options as $ticketOption ) {
+			$id = $ticketOption['TicketOption']['id'];
+
+			if ( $ticketOption['TicketOption']['available'] !== null )
+				$canBuy = $ticketOption['TicketOption']['available']-$ticketOption['TicketOption']['ticket_count'];
+			else
+				$canBuy = 999;
+
+			if ( $canBuy < $data['quantity'][$id] ) {
+				$this->query('UNLOCK TABLES');
+				return false;
+			}
+		}
+
 		$organization = $data['organization'];
 
-		$this->query('LOCK TABLE ticket_options WRITE');
 		$this->begin();
 
 		foreach ( $data['badge_name'] as $option => $names ) {

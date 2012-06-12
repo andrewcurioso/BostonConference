@@ -279,6 +279,7 @@ class TicketsController extends BostonConferenceAppController {
 
 		if ( !$this->Ticket->completeRegistration($userId, $ticket, $callback) ) {
 			$this->Session->delete('Ticket');
+			$this->Session->setFlash(__('There was an error processing your tickets'));
 			$this->redirect(array('action' => 'index'));
 			return false;
 		}

@@ -41,7 +41,7 @@ if ( count( $ticketOptions ) > 0 )
 	<tr>
 		<th><?php echo __('Package'); ?></th>
 		<th><?php echo __('Price');?></th>
-		<th><?php echo __('Quality');?></th>
+		<th><?php echo __('Quantity');?></th>
 	</tr>
 	<?php
 	foreach ($ticketOptions as $ticketOption): ?>
@@ -64,13 +64,13 @@ if ( count( $ticketOptions ) > 0 )
 					$canBuy = 999;
 
 				if ( $canBuy <= 0 )
-					echo "Sold Out";
+					echo __('Sold Out');
 				else {
 					$availableToBuy = true;
 
 					$options = array();
 
-					for ( $i=0; $i < $canBuy && $i <= 10; $i++ )
+					for ( $i=0; $i <= $canBuy && $i <= 10; $i++ )
 						$options[] = number_format($i,0);
 
 					echo $this->Form->select('quantity.'.$ticketOption['TicketOption']['id'],$options,array('empty'=>false));
@@ -84,7 +84,7 @@ if ( count( $ticketOptions ) > 0 )
 
 <?php
 
-	echo $this->Form->end( $availableToBuy ? __('Continue') : false );
+	echo $this->Form->end( $availableToBuy ? __('Continue') : null );
 
 } else {
 ?>
