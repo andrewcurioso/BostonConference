@@ -1,5 +1,7 @@
 <?php
 App::uses('BostonConferenceAppController', 'BostonConference.Controller');
+App::uses('CakeEmail', 'Network/Email');
+
 /**
  * Sponsors Controller
  *
@@ -65,6 +67,22 @@ class SponsorsController extends BostonConferenceAppController {
 			$this->Sponsor->create();
 			if ($this->Sponsor->save($this->request->data)) {
 				$this->Session->setFlash(__('Your request has been submitted. We will get back to you shortly.'));
+
+				if ( $toEmail = Configure::read('BostonConference.adminEmail') ) {
+
+					$r = $this->request->data;
+
+					try {
+						$email = new CakeEmail('default');
+						$email->to($toEmail)
+						      ->template('BostonConference.new_sponsor_request')
+						      ->subject('New sponsor information request from '.$r['Sponsor']['organization'])
+						      ->viewVars(array( 'sponsor' => $r ))
+						      ->emailFormat('both');
+						$email->send();
+					} catch ( Exception $e ) { }
+				}
+
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('Your request could not be submitted. Please, try again.'));
