@@ -13,7 +13,7 @@ $this->append('sidebar');
 
   <p>
     Please use the form on the left and we will get back
-    to you within 5 business days.
+    to you within as soon as possible.
   </p>
 <?php
 $this->end();
@@ -27,8 +27,8 @@ $this->end();
 
 		<?php
 
-		echo $this->Form->input('organization', array('label' => 'Organization Name')); 	
-		echo $this->Form->input('website', array('label' => 'Organization Website (will be linked to)')); 	
+		echo $this->Form->input('organization', array('label' => 'Organization Name'));
+		echo $this->Form->input('website', array('label' => 'Organization Website (will be linked to)'));
 		echo $this->Form->input('contact_name');
 		echo $this->Form->input('contact_email');
 		echo $this->Form->input('contact_phone');
