@@ -14,9 +14,9 @@ class TicketsController extends BostonConferenceAppController {
  */
 	public $components = array('Session','BostonConference.Payments');
 
-/** 
+/**
  * Before filter
- * 
+ *
  * @return void
  */
 	public function beforeFilter() {
@@ -48,7 +48,28 @@ class TicketsController extends BostonConferenceAppController {
 			}
 		}
 
-		$this->set('ticketOptions', $this->Ticket->TicketOption->find('all',array('order'=>array('label'))));
+		// Conditions to return TicketOptions that are within the specified start & end dates,
+		// or that have no start date, or no end date
+		$conditions = array(
+							 array( 'OR' =>
+								   array(
+									'TicketOption.sale_start < NOW()',
+									'TicketOption.sale_start IS NULL',
+									)
+								  ),
+							 array( 'OR' =>
+								   array(
+									'TicketOption.sale_end > NOW()',
+									'TicketOption.sale_end IS NULL'
+									)
+								   )
+							);
+
+		$this->set('ticketOptions', $this->Ticket->TicketOption->find('all',
+																	  array('order'=>array('label'),
+																			'conditions' => $conditions
+																			)));
+
 
 		$this->set('tickets', $this->Ticket->find('all',array(
 			'order'=>array('Ticket.badge_name','Ticket.id'),
@@ -277,7 +298,7 @@ class TicketsController extends BostonConferenceAppController {
 /**
  * Completes registration.
  *
- * @return void 
+ * @return void
  */
 	protected function _completeRegistration( $callback = null ) {
 

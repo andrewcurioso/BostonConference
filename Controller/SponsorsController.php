@@ -77,7 +77,7 @@ class SponsorsController extends BostonConferenceAppController {
 						$email->to($toEmail)
 						      ->template('BostonConference.new_sponsor_request')
 						      ->subject('New sponsor information request from '.$r['Sponsor']['organization'])
-						      ->viewVars(array( 'sponsor' => $r ))
+						      ->viewVars(array( 'sponsor' => $r, 'id' => $this->Sponsor->id ))
 						      ->emailFormat('both');
 						$email->send();
 					} catch ( Exception $e ) { }

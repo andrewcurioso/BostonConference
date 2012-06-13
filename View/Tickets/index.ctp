@@ -31,7 +31,7 @@ if ( count( $ticketOptions ) > 0 )
 {
 
 	echo $this->Form->create('Ticket');
-	
+
 	$availableToBuy = false;
 ?>
 
