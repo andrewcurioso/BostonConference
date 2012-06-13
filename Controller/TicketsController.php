@@ -32,17 +32,16 @@ class TicketsController extends BostonConferenceAppController {
  */
 	public function index() {
 		if ($this->request->is('post')) {
-			$countIsValid = false;
+			$items = array();
 
-			foreach( $this->data['quantity'] as $quantity ) {
+			foreach( $this->data['quantity'] as $k => $quantity ) {
 				if ( $quantity > 0 ) {
-					$countIsValid = true;
-					break;
+					$items[$k] = $quantity;
 				}
 			}
 
-			if ( $countIsValid ) {
-				$this->Session->write('Ticket',$this->data);
+			if ( count($items) > 0 ) {
+				$this->Session->write('Ticket',array('quantity' => $items));
 				$this->redirect(array('action' => 'checkout'));
 			} else {
 				$this->Session->setFlash(__('Please select a valid quantity of tickets before continuing'));
@@ -63,6 +62,8 @@ class TicketsController extends BostonConferenceAppController {
  * @return void
  */
 	public function checkout() {
+		$items = array();
+
 		if ( !$this->Auth->loggedIn() ) {
 			$this->Session->setFlash(__('Please login before buying tickets'));
 			$this->redirect($this->Auth->loginAction);
@@ -78,7 +79,7 @@ class TicketsController extends BostonConferenceAppController {
 				'all',
 				array(
 					'order'=>array('label'),
-					'conditions' => array( 'id' => array_keys($ticket['quantity']) )
+					'conditions' => array( 'TicketOption.id' => array_keys($ticket['quantity']) )
 				)
 			);
 
@@ -95,6 +96,12 @@ class TicketsController extends BostonConferenceAppController {
 				if ( $option['TicketOption']['id'] == $id ) {
 					$options[$i]['TicketOption']['quantity'] = $quantity;
 					$totalPrice += $quantity * $option['TicketOption']['price'];
+
+					$items[] = array(
+						'name' => $option['TicketOption']['label'],
+						'amount' => $option['TicketOption']['price'],
+						'quantity' => $quantity
+					);
 					break;
 				}
 			}
@@ -107,6 +114,7 @@ class TicketsController extends BostonConferenceAppController {
 
 			$ticket['organization'] = $this->data['Ticket']['organization'];
 
+
 			foreach( $this->data['Ticket'] as $key => $value ) {
 				if ( preg_match('/badge_name_([0-9]+)_([0-9]+)/',$key,$m) == 1 ) {
 
@@ -116,6 +124,7 @@ class TicketsController extends BostonConferenceAppController {
 						$ticket['badge_name'][$m[1]] = array($value);
 					else
 						$ticket['badge_name'][$m[1]][] = $value;
+
 				}
 			}
 
@@ -123,7 +132,7 @@ class TicketsController extends BostonConferenceAppController {
 				$this->Session->write('Ticket',$ticket);
 
 				if ( $totalPrice > 0 ) {
-					if ( !$this->Payments->process($totalPrice) ) {
+					if ( !$this->Payments->process($totalPrice,$items) ) {
 						$this->Session->setFlash(__('There was an error processing your tickets'));
 						$this->redirect(array('action' => 'index'));
 					}

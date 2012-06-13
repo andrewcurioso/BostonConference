@@ -58,8 +58,8 @@ class PaymentsComponent extends Component {
  *
  * @return boolean True if the processing succeeded
  */
-	public function process($amount) {
-		return $this->_processPaypal($amount);
+	public function process($amount,$items=array()) {
+		return $this->_processPaypal($amount,$items);
 	}
 
 /**
@@ -76,7 +76,7 @@ class PaymentsComponent extends Component {
  *
  * @return boolean True if the processing succeeded
  */
-	protected function _processPaypal($amount) {
+	protected function _processPaypal($amount,$items=array()) {
 
 		$nvpstr  = '&PAYMENTREQUEST_0_AMT='. $amount;
 		$nvpstr .= '&PAYMENTREQUEST_0_PAYMENTACTION=Sale';
@@ -84,7 +84,17 @@ class PaymentsComponent extends Component {
 		$nvpstr .= '&CANCELURL=' . Router::url(array('controller'=>'tickets','action'=>'cancel'),true);
 		$nvpstr .= '&PAYMENTREQUEST_0_CURRENCYCODE='.$this->_paypalSettings['currency'];
 		$nvpstr .= '&NOSHIPPING=1';
+		$nvpstr .= '&PAYMENTREQUEST_0_DESC=Conference%20Tickets';
+
+		foreach ( $items as $i => $item ) {
+			$i = number_format($i,0);
+			$nvpstr .= '&L_PAYMENTREQUEST_0_NAME'.$i.'='.$item['name'];
+			$nvpstr .= '&L_PAYMENTREQUEST_0_QTY'.$i.'='.$item['quantity'];
+			$nvpstr .= '&L_PAYMENTREQUEST_0_AMT'.$i.'='.$item['amount'];
+		}
 		
+		$this->Session->write('PayPal.nvpstr',$nvpstr);
+
 		$resArray = $this->_callPaypalAPI('SetExpressCheckout', $nvpstr);
 		$ack = strtoupper($resArray['ACK']);
 
@@ -95,7 +105,7 @@ class PaymentsComponent extends Component {
 
 			$this->_Controller->redirect($this->_paypalSettings['frontend'].'?cmd=_express-checkout&token='.$token);
 		}
-		
+
 		return false;
 	}
 
@@ -127,9 +137,7 @@ class PaymentsComponent extends Component {
 			));
 
 			$nvpstr .= '&PAYERID='.urlencode($payerId);
-			$nvpstr .= '&PAYMENTREQUEST_0_AMT='.$amount;
-			$nvpstr .= '&PAYMENTREQUEST_0_CURRENCYCODE='.$this->_paypalSettings['currency'];
-			$nvpstr .= '&PAYMENTREQUEST_0_PAYMENTACTION=Sale';
+			$nvpstr .= $this->Session->read('PayPal.nvpstr');
 
 			$resArray = $this->_callPaypalAPI('DoExpressCheckoutPayment', $nvpstr);
 			$ack = strtoupper($resArray['ACK']);

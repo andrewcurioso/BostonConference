@@ -10,7 +10,6 @@ echo '<h3>'.__('Name for badges').'</h3>';
 
 foreach( $ticketOptions as $ticketOption )
 {
-
 	for ( $i = 0; $i < $ticketOption['TicketOption']['quantity']; $i++ ) {
 		echo $this->Form->input(
 			'badge_name_'.$ticketOption['TicketOption']['id'].'_'.((int)$i),
