@@ -51,24 +51,24 @@ class TicketsController extends BostonConferenceAppController {
 		// Conditions to return TicketOptions that are within the specified start & end dates,
 		// or that have no start date, or no end date
 		$conditions = array(
-							 array( 'OR' =>
-								   array(
-									'TicketOption.sale_start < NOW()',
-									'TicketOption.sale_start IS NULL',
-									)
-								  ),
-							 array( 'OR' =>
-								   array(
-									'TicketOption.sale_end > NOW()',
-									'TicketOption.sale_end IS NULL'
-									)
-								   )
-							);
+			array( 'OR' =>
+				array(
+					'TicketOption.sale_start < NOW()',
+					'TicketOption.sale_start IS NULL',
+				)
+			),
+			array( 'OR' =>
+				array(
+					'TicketOption.sale_end > NOW()',
+					'TicketOption.sale_end IS NULL'
+				)
+			)
+		);
 
 		$this->set('ticketOptions', $this->Ticket->TicketOption->find('all',
-																	  array('order'=>array('label'),
-																			'conditions' => $conditions
-																			)));
+			array('order'=>array('label'),
+			'conditions' => $conditions
+		)));
 
 
 		$this->set('tickets', $this->Ticket->find('all',array(

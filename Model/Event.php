@@ -24,6 +24,20 @@ class Event extends BostonConferenceAppModel {
 				'allowEmpty' => false,
 				'required' => true
 			),
+		),
+		'available_tickets' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				'message' => 'Available tickets must be a number',
+				'allowEmpty' => true,
+				'required' => false
+			),
+			'comparison' => array(
+				'rule' => array('comparison','>',-1),
+				'message' => 'Available tickets must be a positive integer',
+				'allowEmpty' => true,
+				'required' => false
+			),
 		)
 	);
 /**

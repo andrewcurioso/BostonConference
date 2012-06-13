@@ -63,6 +63,9 @@ if ( count( $ticketOptions ) > 0 )
 				else
 					$canBuy = 999;
 
+				if ( $ticketOption['Event']['available_tickets'] !== null )
+					$canBuy = min($ticketOption['Event']['available_tickets']-$ticketOption['Event']['ticket_count'],$canBuy);
+
 				if ( $canBuy <= 0 )
 					echo __('Sold Out');
 				else {

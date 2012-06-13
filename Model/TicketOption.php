@@ -84,7 +84,7 @@ class TicketOption extends BostonConferenceAppModel {
  */
 	public $belongsTo = array(
 		'Event' => array(
-			'className' => 'Event',
+			'className' => 'BostonConference.Event',
 			'foreignKey' => 'event_id',
 		)
 	);

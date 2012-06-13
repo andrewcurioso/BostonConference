@@ -64,7 +64,7 @@ class Ticket extends BostonConferenceAppModel {
 			'foreignKey' => 'user_id',
 		),
 		'TicketOption' => array(
-			'className' => 'TicketOption',
+			'className' => 'BostonConference.TicketOption',
 			'foreignKey' => 'ticket_option_id',
 			'counterCache' => true,
 		)
@@ -109,19 +109,22 @@ class Ticket extends BostonConferenceAppModel {
 			return false;
 		}
 
-		$this->query('LOCK TABLES ticket_options as TicketOption WRITE, tickets as Ticket WRITE');
+		$this->query('LOCK TABLES events as Event WRITE, ticket_options as TicketOption WRITE, tickets as Ticket WRITE');
 
+		$this->TicketOption->recursive = -1;
 		$options = $this->TicketOption->find(
 				'all',
 				array(
 					'order'=>array('label'),
-					'conditions' => array( 'id' => array_keys($data['quantity']) )
+					'conditions' => array( 'TicketOption.id' => array_keys($data['quantity']) )
 				)
 			);
 
 		if ( count($options) != count($data['quantity']) ) {
 			return false;
 		}
+
+		$eventQuantities = array();
 
 		foreach( $options as $ticketOption ) {
 			$id = $ticketOption['TicketOption']['id'];
@@ -135,6 +138,13 @@ class Ticket extends BostonConferenceAppModel {
 				$this->query('UNLOCK TABLES');
 				return false;
 			}
+
+			$eventId = $ticketOption['TicketOption']['event_id'];
+
+			if ( !array_key_exists($eventId,$eventQuantities) )
+				$eventQuantities[$eventId]  = $data['quantity'][$id];
+			else
+				$eventQuantities[$eventId] += $data['quantity'][$id];
 		}
 
 		$organization = $data['organization'];
@@ -159,6 +169,23 @@ class Ticket extends BostonConferenceAppModel {
 					return false;
 				}
 			}
+		}
+
+		$events = $this->TicketOption->Event->find('all',array('conditions'=>array('Event.id' => array_keys($eventQuantities))));
+
+		foreach( $events as $event ) {
+			$newTotal = $event['Event']['ticket_count'] + $eventQuantities[$event['Event']['id']];
+
+			if ( $event['Event']['available_tickets'] !== null ) {
+				if ( $event['Event']['available_tickets'] < $newTotal ) {
+					$this->rollback();
+					$this->query('UNLOCK TABLES');
+					return false;
+				}
+			}
+
+			$this->TicketOption->Event->id = $event['Event']['id'];
+			$this->TicketOption->Event->saveField('ticket_count',$newTotal);
 		}
 
 		if ( $callback && !call_user_func($callback) ) {
