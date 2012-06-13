@@ -78,7 +78,9 @@ class PaymentsComponent extends Component {
  */
 	protected function _processPaypal($amount,$items=array()) {
 
-		$nvpstr  = '&PAYMENTREQUEST_0_AMT='. $amount;
+		$nvpstr  = '&SOLUTIONTYPE=Sole';
+		$nvpstr .= '&LANDINGPAGE=Billing';
+		$nvpstr .= '&PAYMENTREQUEST_0_AMT='. $amount;
 		$nvpstr .= '&PAYMENTREQUEST_0_PAYMENTACTION=Sale';
 		$nvpstr .= '&RETURNURL=' . Router::url(array('controller'=>'tickets','action'=>'confirm'),true);
 		$nvpstr .= '&CANCELURL=' . Router::url(array('controller'=>'tickets','action'=>'cancel'),true);
