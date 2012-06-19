@@ -691,6 +691,38 @@ div.schedule div.talk.minutes-60 {
 	height: 78px;
 }
 
+div.schedule div.talk.minutes-75 {
+	height: 96px;
+}
+
+div.schedule div.talk.minutes-90 {
+	height: 118px;
+}
+
+div.schedule div.talk.minutes-105 {
+	height: 142px;
+}
+
+div.schedule div.talk.minutes-120 {
+	height: 158px;
+}
+
+div.schedule div.talk.minutes-135 {
+	height: 177px;
+}
+
+div.schedule div.talk.minutes-150 {
+	height: 198px;
+}
+
+div.schedule div.talk.minutes-165 {
+	height: 218px;
+}
+
+div.schedule div.talk.minutes-180 {
+	height: 238px;
+}
+
 div.schedule div.talk.double-block {
 	width: 323px;
 }

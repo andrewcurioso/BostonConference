@@ -61,17 +61,13 @@ class ScheduleHelper extends AppHelper {
  */
 	public function getTalkClass( $talk, $talks, $i )
 	{
-		$duration = floor($talk['Talk']['duration']/15);
+		$duration = floor($talk['Talk']['duration']/15)*15;
 		$class = '';
 
-		if ( $duration == 0 || $duration == 1 )
+		if ( $duration == 0 )
 			$class = 'minutes-15';
-		else if ( $duration == 2 )
-			$class = 'minutes-30';
-		else if ( $duration == 3 )
-			$class = 'minutes-45';
 		else
-			$class = 'minutes-60';
+			$class = 'minutes-'.$duration;
 
 		if ( $talks > 1 )
 			$class .= ' ';
